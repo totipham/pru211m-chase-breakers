@@ -75,6 +75,7 @@ crashlytics-build.properties
 /# IL2CPP build artifacts should be ignored
 
 *BackUpThisFolder_ButDontShipItWithYourGame
+*BurstDebugInformation_DoNotShip
 
 # OS specific files
 *DS_Store
