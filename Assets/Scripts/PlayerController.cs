@@ -6,20 +6,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float gravity;
-    public float gravityScale = 1.0f;
     public Vector2 velocity;
     public float jumpVelocity = 30f;
-    public float jumpVelocityScale = 1.0f;
     public float groundHeight = -2f;
     public bool isGrounded = false;
-    public bool isFall = false;
     public float acceleration = 10f;
     public float maxAcceleration = 10f;
-    public float maxVelocity = 100f;
+    public float maxVelocity = 30f;
     public Joystick joystick;
-
-    public float initialJumpHeight;
-    public float maxJumpHeight = 5.0f;
+    public float jumpSpeed = 2.2f;
+    public bool isFall = false;
 
 // Start is called before the first frame update
     void Start()
@@ -30,31 +26,40 @@ public class PlayerController : MonoBehaviour
 // Update is called once per frame
     void Update()
     {
-        Vector2 pos = transform.position;
         if (isGrounded)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.direction.y > 0)
+            isFall = false;
+            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0)
             {
                 isGrounded = false;
-
-                // Increase the jump velocity based on the x velocity
-                jumpVelocityScale = 1.0f + Mathf.Pow(velocity.x / maxVelocity, 4);
-
-                velocity.y = jumpVelocity * jumpVelocityScale;
-
-                // Store the initial jump height
-                initialJumpHeight = pos.y;
+                velocity.y = jumpVelocity;
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.direction.y < 0)
+            //If player want to bow down
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0)
             {
                 //TODO: Bow Down Animation
-                Debug.Log("HOLDDDDDDDDDDDDDDD");
             }
+        }
+        else
+        {
+            //Fall down
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0)
+            {
+                isFall = true;
+            }
+        }
+    }
 
-            float velocityRatio = velocity.x / maxVelocity;
-            acceleration = maxAcceleration * (1 - velocityRatio);
-            velocity.x += acceleration * Time.deltaTime;
+    void FixedUpdate()
+    {
+        Vector2 pos = transform.position;
+        float velocityRatio = velocity.x / maxVelocity;
+
+        if (isGrounded)
+        {
+            acceleration = maxAcceleration * (1 - velocityRatio); //a = a0 * (1 - v/v0)
+            velocity.x += acceleration * Time.fixedDeltaTime; //v = a
 
             if (velocity.x >= maxVelocity)
             {
@@ -63,18 +68,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // Increase the gravity scale based on the x velocity
-            gravityScale = 1.0f + Mathf.Pow(velocity.x / maxVelocity, 4);
-
-            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.direction.y < 0)
+            //Fall down
+            if (isFall)
             {
-                pos.y += gravity * gravityScale * Time.deltaTime;
+                pos.y += gravity * Time.deltaTime * jumpSpeed;
             }
             else
             {
-                pos.y += velocity.y * Time.deltaTime;
-
-                velocity.y += gravity * gravityScale * Time.deltaTime;
+                pos.y += velocity.y * Time.fixedDeltaTime * velocity.x / maxVelocity * jumpSpeed;
+                velocity.y += gravity * Time.fixedDeltaTime * velocity.x / maxVelocity * jumpSpeed;
             }
 
             if (pos.y <= groundHeight)
