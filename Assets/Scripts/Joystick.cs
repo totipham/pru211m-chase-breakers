@@ -6,9 +6,9 @@ public class Joystick : MonoBehaviour
 {
     public Transform player;
     public float speed = 5.0f;
-    private bool touchStart = false;
-    private Vector2 pointA;
-    private Vector2 pointB;
+    public bool touchStart = false;
+    public Vector2 pointA;
+    public Vector2 pointB;
     public Vector2 direction;
 
     public Transform circle;
@@ -55,5 +55,10 @@ public class Joystick : MonoBehaviour
             circle.GetComponent<SpriteRenderer>().enabled = false;
             outerCircle.GetComponent<SpriteRenderer>().enabled = false;
         }
+    }
+
+    public float GetAxisX()
+    {
+        return direction.x;
     }
 }
