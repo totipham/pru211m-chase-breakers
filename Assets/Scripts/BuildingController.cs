@@ -13,7 +13,7 @@ public class BuildingController : MonoBehaviour
 
     public void Awake()
     {
-        player = GameObject.Find("PLayer").GetComponent<PlayerController>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
 
         collider = GetComponent<BoxCollider2D>();
         buildingHeight = transform.position.y + (collider.size.y / 2);
