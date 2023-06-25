@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Bullet
   - ArmedObstacle
+  - Ground
+  - Ground2
+  - Ground1
   layers:
   - Default
   - TransparentFX
@@ -42,4 +45,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4093421035
     locked: 0

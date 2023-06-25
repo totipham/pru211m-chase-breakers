@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6924656547351174682}
   - component: {fileID: 6924656547351174685}
   - component: {fileID: 6924656547351174686}
+  - component: {fileID: 943899594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6924656547351174663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.2702, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.45967263, y: 0.45967263, z: 0.45967263}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,17 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9253b69c6283e42c4b2d0985641870dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -100
-  velocity: {x: 0, y: 0}
-  jumpVelocity: 20
-  groundHeight: -2
-  isGrounded: 1
-  acceleration: 10
-  maxAcceleration: 10
-  maxVelocity: 20
   joystick: {fileID: 0}
-  jumpSpeed: 1.5
+  velocity: {x: 0, y: 0}
+  jumpVelocity: 25
+  groundHeight: -2
+  maxVelocity: 20
+  acceleration: 3
+  maxAcceleration: 10
+  isGrounded: 0
   isFall: 0
+  isDead: 0
 --- !u!114 &6924656547351174685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,3 +156,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &943899594
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6924656547351174663}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 10
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
