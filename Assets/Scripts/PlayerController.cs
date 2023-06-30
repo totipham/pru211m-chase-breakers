@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public bool isFall;
     public bool isDead;
+    public bool isGonnaClimb;
+
+    private RaycastHit2D _hit;
 
     void Start()
     {
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         isFall = false;
         isDead = false;
+        isGonnaClimb = false;
     }
 
     void Update()
@@ -48,7 +52,15 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0)
             {
                 isGrounded = false;
-                Jump();
+
+                if (isGonnaClimb)
+                {
+                    Climb();
+                }
+                else
+                {
+                    Jump();
+                }
             }
 
             //Control: Down
@@ -70,17 +82,33 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 pos = transform.position;
-        // float velocityRatio = velocity.x / maxVelocity;
 
+        //Player: Is in the ground
         if (isGrounded)
         {
-            // acceleration = maxAcceleration * (1 - velocityRatio);
-            // velocity.x += acceleration * Time.fixedDeltaTime;
-            //
-            // if (velocity.x > maxVelocity)
-            // {
-                velocity.x = maxVelocity;
-            // }
+            velocity.x = maxVelocity;
+
+            _hit = Physics2D.Raycast(transform.position,
+                new Vector3(1, 0.5f, 0), 10f);
+
+            // Debug.Log("Player can " + _hit.collider);
+            Debug.DrawRay(transform.position, new Vector3(1, 0.5f, 0), Color.green);
+
+            if (_hit.collider)
+            {
+                if (_hit.collider.CompareTag("Ground"))
+                {
+                    isGonnaClimb = true;
+                    Debug.Log("Player can ABC: " + _hit.collider.tag);
+                }
+
+                Debug.Log("Player CAN climb");
+            }
+            else
+            {
+                Debug.Log("Player can't climb");
+                isGonnaClimb = false;
+            }
 
             //Player: Die
             if (!IsVisibleFromCamera())
@@ -89,38 +117,31 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Is Dead: " + isDead);
             }
         }
-        else
+        else //Player: Is in the air
         {
             //Player: Fall down
             if (isFall)
             {
                 _rigid.gravityScale = 30;
             }
-
-            // if (pos.y <= groundHeight)
-            // {
-            //     pos.y = groundHeight;
-            //     isGrounded = true;
-            //     _rigid.gravityScale = 10;
-            // }
         }
 
         transform.position = pos;
     }
-    
-    bool IsVisibleFromCamera()
-    {
-        Vector3 viewportPosition =
-            _camera.WorldToViewportPoint(transform
-                .position);
-        return viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 &&
-               viewportPosition.y <= 1;
-    }
 
     void Jump()
     {
+        Debug.Log("Jumping on the ground");
         _rigid.velocity = Vector3.zero;
         _rigid.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+    }
+
+    void Climb()
+    {
+        Debug.Log("Action: Climbing on the ground");
+        _rigid.velocity = Vector3.zero;
+        // _rigid.AddForce(Vector2.up * 25f, ForceMode2D.Impulse);
+        _rigid.AddForce(velocity * jumpVelocity, ForceMode2D.Impulse);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -130,5 +151,14 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             _rigid.gravityScale = 10;
         }
+    }
+
+    bool IsVisibleFromCamera()
+    {
+        Vector3 viewportPosition =
+            _camera.WorldToViewportPoint(transform
+                .position);
+        return viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 &&
+               viewportPosition.y <= 1;
     }
 }
