@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GroundSpawner : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class GroundSpawner : MonoBehaviour
 
     //not visible in the inspector
     int lastParcourPart;
+
+    private Vector2 lastEndPosition;
     
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        lastEndPosition = gameObject.GetComponent<Tilemap>().transform.position;
         yield return new WaitForSeconds(5);
         while (true)
         {
@@ -53,11 +57,13 @@ public class GroundSpawner : MonoBehaviour
         
         //get random roof and instantiate it as a child of the track object
         int random = Random.Range(0, roofParts.Length);
-        Vector3 pos = gameObject.transform.position;
+        // Vector3 pos = gameObject.transform.position;
+        //
+        // pos.x += 17f;
 
-        pos.x += 17f;
+        // gameObject.transform.position = lastEndPosition;
         
-        GameObject newRoof = Instantiate(roofParts[random], pos, transform.rotation) as GameObject;
+        GameObject newRoof = Instantiate(roofParts[random], lastEndPosition, transform.rotation) as GameObject;
         newRoof.transform.parent = GameObject.Find("Spawner").transform;
     }
 

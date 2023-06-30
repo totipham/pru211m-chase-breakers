@@ -8,6 +8,8 @@ public class MoveObject : MonoBehaviour
     public bool isSpawned;
 
     PlayerController player;
+    public float distanceThreshold = 5f;
+    private Vector2 lastEndPosition;
 
     private void Awake()
     {
@@ -20,13 +22,17 @@ public class MoveObject : MonoBehaviour
     {
         float realVelocity = player.velocity.x / depth;
         Vector2 pos = transform.position;
-
         pos.x -= realVelocity * Time.fixedDeltaTime;
-
-        if (pos.x <= -2.5 && !isSpawned)
+        
+        Renderer objectRenderer = gameObject.GetComponentInChildren<Renderer>();
+        float rightmostPoint = objectRenderer.bounds.max.x;
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(rightmostPoint, 0f, 0f));
+        float distanceToScreenRight = Camera.main.pixelWidth - screenPoint.x;
+        if (distanceToScreenRight >= distanceThreshold && !isSpawned)
         {
             isSpawned = true;
-            gameObject.GetComponent<GroundSpawner>().AddRoof();
+            // gameObject.GetComponent<GroundSpawner>().AddRoof();
+            Debug.Log("Building: Can add now");
         }
 
         if (pos.x <= -20)
