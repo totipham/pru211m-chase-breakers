@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Joystick : MonoBehaviour
 {
-    public Transform player;
-    public float speed = 5.0f;
     public bool touchStart = false;
     public Vector2 pointA;
     public Vector2 pointB;
@@ -48,6 +46,9 @@ public class Joystick : MonoBehaviour
             direction = Vector2.ClampMagnitude(offset, 1.0f);
 
             circle.transform.position = new Vector2(pointA.x + direction.x, pointA.y + direction.y);
+            
+            circle.GetComponent<SpriteRenderer>().enabled = true;
+            outerCircle.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
