@@ -23,7 +23,7 @@ public class GroundSpawner : MonoBehaviour {
     IEnumerator Start() {
         _objectPooling = GetComponent<ObjectPooling>();
         _platformLength = _objectPooling.GetLengthByTag("Platform");
-        _currentPlatform = GenerateNextPlatform(new Vector2(-6, -4));
+        _currentPlatform = GenerateStartPlatform();
         _obstacleLength = _objectPooling.GetLengthByTag("Obstacle");
 
         yield return new WaitForSeconds(5);
@@ -57,15 +57,27 @@ public class GroundSpawner : MonoBehaviour {
         }
     }
 
+    private GameObject GenerateStartPlatform() {
+        return _objectPooling.SpawnFromPoolByType("StartPlatform", new Vector2(-6, -4), Quaternion.identity, "Normal");
+    }
+
 
     private GameObject GenerateNextPlatform(Vector2 nextPlatformPosition) {
         GameObject spawnPlatform = null;
         List<string> typeList = _objectPooling.GetTypeListByTag("Platform");
+
+
+        foreach (var type in typeList) {
+            Debug.Log("Type: " + type + " is available");
+        }
+        
+        Debug.Log("Type list length: " + typeList.Count);
         
         if (_platformLength > 0) {
             while (spawnPlatform == null) {
                 var random = typeList.Count == 1 ? 0 : Random.Range(0, typeList.Count);
                 string type = typeList[random];
+                Debug.Log("Type: " + type + " is chosen");
                 spawnPlatform =
                     _objectPooling.SpawnFromPoolByType("Platform", nextPlatformPosition, Quaternion.identity, type);
             }

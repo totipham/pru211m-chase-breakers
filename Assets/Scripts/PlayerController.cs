@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour {
             //Player: Die
             if (!IsVisibleFromCamera()) {
                 isDead = true;
+                StopRunning();
                 Debug.Log("Is Dead: " + isDead);
             }
 
