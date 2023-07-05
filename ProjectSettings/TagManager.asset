@@ -5,10 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
-  - ArmedObstacle
   - Ground
-  - Ground2
-  - Ground1
   layers:
   - Default
   - TransparentFX

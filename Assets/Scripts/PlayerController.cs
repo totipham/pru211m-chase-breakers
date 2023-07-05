@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     public bool isStopping;
 
     private RaycastHit2D _hit;
+    private RaycastHit2D _backHit;
 
     void Start() {
         joystick = GetComponent<Joystick>();
@@ -44,11 +45,11 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         if (isDead || isStopping) return;
 
-        if (canClimb) {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
-                isClimbing = true;
-            }
-        } else {
+        // if (canClimb) {
+        //     if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
+        //         isClimbing = true;
+        //     }
+        // } else {
             if (isGrounded) {
                 isFall = false;
                 isJumping = false;
@@ -70,36 +71,46 @@ public class PlayerController : MonoBehaviour {
                     isFall = true;
                 }
             }
-        }
+        // }
     }
 
     void FixedUpdate() {
         if (isStopping) return;
         
         //Player: Is climbing
-        if (isClimbing && canClimb) {
-            isGrounded = false;
-            Climb();
-        } else {
-            _rigid.gravityScale = 10;
-        }
+        // if (isClimbing && canClimb) {
+        //     isGrounded = false;
+        //     Climb();
+        // } else {
+        //     _rigid.gravityScale = 10;
+        // }
 
         //Player: Is in the ground
         if (isGrounded) {
             Vector2 pos = transform.position;
             velocity.x = maxVelocity;
 
-            _hit = Physics2D.Raycast(transform.position,
-                new Vector3(1, 0.5f, 0), 2f);
-            Debug.DrawRay(transform.position, new Vector3(1, 0.5f, 0), Color.green);
+            // _hit = Physics2D.Raycast(transform.position,
+            //     new Vector3(1, 0.5f, 0), 1f);
+            // Debug.DrawRay(transform.position, new Vector3(1, 0.5f, 0), Color.green);
+            
+            _backHit = Physics2D.Raycast(transform.position,
+                new Vector2(0.2f, 1), 1f);
+            Debug.DrawRay(transform.position, new Vector2(0.2f, 1), Color.yellow);
 
-            if (_hit.collider) {
-                if (_hit.collider.CompareTag("Ground")) {
-                    canClimb = true;
+            // if (_hit.collider) {
+            //     if (_hit.collider.CompareTag("Ground")) {
+            //         canClimb = true;
+            //     }
+            // } else {
+            //     canClimb = false;
+            // }
+            
+            if (_backHit.collider) {
+                if (_backHit.collider.CompareTag("Ground")) {
+                    StopRunning();
                 }
-            } else {
-                canClimb = false;
-            }
+            } 
 
             //Player: Die
             if (!IsVisibleFromCamera()) {
@@ -163,16 +174,16 @@ public class PlayerController : MonoBehaviour {
             }
 
             //Raycast right
-            RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.right, 0.5f);
+            // RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.right, 0.5f);
 
-            if (groundHit.collider) {
-                if (groundHit.collider.CompareTag("Ground") && !isClimbing) {
+            // if (_hit.collider) {
+            //     if (_hit.collider.CompareTag("Ground") && !isClimbing) {
                     //If right have ground, do stopping
-                    StopRunning();
+                    // StopRunning();
                     
                     //Animation layoff
-                }
-            }
+            //     }
+            // }
         }
     }
 
