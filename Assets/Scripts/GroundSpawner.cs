@@ -21,7 +21,7 @@ public class GroundSpawner : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        lastEndPosition = gameObject.GetComponent<Tilemap>().transform.position;
+        lastEndPosition = gameObject.GetComponentInChildren<Tilemap>().transform.position;
         yield return new WaitForSeconds(5);
         while (true)
         {
@@ -35,7 +35,12 @@ public class GroundSpawner : MonoBehaviour
     {
         if (trackParts.Length > 0)
         {
-            int random = Random.Range(0, trackParts.Length);
+            int random = 0;
+
+            if (trackParts.Length == 1) {
+                random = Random.Range(0, trackParts.Length);
+            }
+            
             if (lastParcourPart != random)
             {
                 GameObject newParcour =

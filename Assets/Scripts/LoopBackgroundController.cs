@@ -21,8 +21,8 @@ public class LoopBackgroundController : MonoBehaviour
 
         pos.x -= realVelocity * Time.fixedDeltaTime;
 
-        if (pos.x <= -13)
-            pos.x = 11;
+        if (pos.x <= -21.6f)
+            pos.x = 21.6f;
 
         transform.position = pos;
     }

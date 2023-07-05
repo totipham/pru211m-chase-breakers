@@ -34,10 +34,10 @@ public class MoveObject : MonoBehaviour
             // gameObject.GetComponent<GroundSpawner>().AddRoof();
             Debug.Log("Building: Can add now");
         }
-
-        if (pos.x <= -20)
+        
+        if (pos.x <= -30)
         {
-            Destroy(gameObject);
+            pos.x = 20;
         }
 
         transform.position = pos;
