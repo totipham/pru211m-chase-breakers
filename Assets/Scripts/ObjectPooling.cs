@@ -40,6 +40,7 @@ public class ObjectPooling : MonoBehaviour {
         _poolDictionary = new Dictionary<string, List<GameObject>>();
         _poolList = new List<GameObject>();
         _typeList = new List<string>();
+        _isDuplicateDictionary = false;
         GenerateObjectInPool();
     }
 
@@ -58,14 +59,14 @@ public class ObjectPooling : MonoBehaviour {
                 obj.transform.name = $"{pool.tag}_{pool.type}";
                 obj.SetActive(false);
 
-                if (_isDuplicateDictionary) {
+                if (_poolDictionary.ContainsKey(tag)) {
                     _poolDictionary[pool.tag].Add(obj);
                 } else {
                     _poolList.Add(obj);
                 }
             }
 
-            if (!_isDuplicateDictionary) {
+            if (!_poolDictionary.ContainsKey(pool.tag)) {
                 _poolDictionary.Add(pool.tag, _poolList);
             }
         }
