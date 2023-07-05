@@ -701,7 +701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1177808497
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,7 +1226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1814064263
 Transform:
   m_ObjectHideFlags: 0
@@ -1412,21 +1412,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 943899594, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 943899594, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: m_Constraints
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6924656547351174663, guid: 973235a0256564301bae04634317f290, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6924656547351174663, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6924656547351174681, guid: 973235a0256564301bae04634317f290, type: 3}
       propertyPath: m_RootOrder
@@ -1472,21 +1460,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6924656547351174682, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: climbSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6924656547351174682, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: maxVelocity
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6924656547351174685, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: circle
-      value: 
-      objectReference: {fileID: 7573838299723236350, guid: f3524305fd1b84004a7ab24caa8d8a8e, type: 3}
-    - target: {fileID: 6924656547351174685, guid: 973235a0256564301bae04634317f290, type: 3}
-      propertyPath: outerCircle
-      value: 
-      objectReference: {fileID: 6362647277062526258, guid: 7dc25637388b9446b8d6307cc762aee0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973235a0256564301bae04634317f290, type: 3}
