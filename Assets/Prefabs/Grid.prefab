@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538ae6ee200b84db8a47b5f8a525c8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  realVelocity: 0
+  isStopped: 0
 --- !u!1 &9200657627783388161
 GameObject:
   m_ObjectHideFlags: 0

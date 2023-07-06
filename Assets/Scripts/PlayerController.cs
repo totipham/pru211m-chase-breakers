@@ -31,12 +31,14 @@ public class PlayerController : MonoBehaviour {
 
     private RaycastHit2D _hit;
     private RaycastHit2D _backHit;
+    private Animator _animator;
 
     void Start() {
         joystick = GetComponent<Joystick>();
         _rigid = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _camera = Camera.main;
-        isGrounded = true;
+        // isGrounded = true;
         isFall = false;
         isDead = false;
         canClimb = false;
@@ -75,7 +77,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (isStopping) return;
+        //Animation: Set Animation
+        _animator.SetBool("Is Jumping", isJumping);
+        _animator.SetBool("Is Falling", isFall);
+
+        if (isStopping) {
+            _animator.SetTrigger("Dead");
+            return;
+        }
         
         //Player: Is climbing
         // if (isClimbing && canClimb) {
@@ -95,8 +104,8 @@ public class PlayerController : MonoBehaviour {
             // Debug.DrawRay(transform.position, new Vector3(1, 0.5f, 0), Color.green);
             
             _backHit = Physics2D.Raycast(transform.position,
-                new Vector2(0.2f, 1), 1f);
-            Debug.DrawRay(transform.position, new Vector2(0.2f, 1), Color.yellow);
+                new Vector2(0.35f, 1), 0.5f);
+            Debug.DrawRay(transform.position, new Vector2(0.35f, 1), Color.yellow);
 
             // if (_hit.collider) {
             //     if (_hit.collider.CompareTag("Ground")) {
@@ -168,6 +177,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D other) {
+        Debug.Log("COLLIDE: " + other.gameObject.name);
         if (other.gameObject.CompareTag("Ground")) {
             if (!isGrounded) {
                 isGrounded = true;

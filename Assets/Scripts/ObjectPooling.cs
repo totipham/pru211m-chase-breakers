@@ -32,7 +32,6 @@ public class ObjectPooling : MonoBehaviour {
     private Dictionary<string, List<string>> _typeDictionary;
     private List<GameObject> _poolList;
     private List<string> _typeList;
-    private bool _isDuplicateDictionary;
     public static ObjectPooling Instance;
 
     void Awake() {
@@ -40,7 +39,6 @@ public class ObjectPooling : MonoBehaviour {
         _poolDictionary = new Dictionary<string, List<GameObject>>();
         _poolList = new List<GameObject>();
         _typeList = new List<string>();
-        _isDuplicateDictionary = false;
         GenerateObjectInPool();
     }
 
@@ -114,7 +112,6 @@ public class ObjectPooling : MonoBehaviour {
             getIndex = _poolDictionary[tag].Count + index;
             if (getIndex >= _poolDictionary[tag].Count) {
                 //Duplicate pool
-                _isDuplicateDictionary = true;
                 GenerateObjectInPool();
             }
         }

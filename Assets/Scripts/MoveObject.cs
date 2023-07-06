@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MoveObject : MonoBehaviour {
     // public float depth = 1;
     // public bool isSpawned;
 
+    public float realVelocity;
+    public bool isStopped;
     private PlayerController _player;
 
     // public float distanceThreshold = 5f;
@@ -25,9 +28,12 @@ public class MoveObject : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        float realVelocity = _player.velocity.x;
+        if (isStopped) return;
+        realVelocity = _player.velocity.x;
         Vector2 pos = transform.position;
         pos.x -= realVelocity * Time.fixedDeltaTime;
+        
+        // _rigid.velocity = new Vector2(-realVelocity, 0f);
 
         // Renderer objectRenderer = gameObject.GetComponentInChildren<Renderer>();
         // float rightmostPoint = objectRenderer.bounds.max.x;
