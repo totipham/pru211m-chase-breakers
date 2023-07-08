@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour {
     public Joystick joystick;
@@ -17,9 +12,6 @@ public class PlayerController : MonoBehaviour {
     public float groundHeight = -2f;
 
     public float maxVelocity = 10f;
-    // public float acceleration = 3f;
-    // public float maxAcceleration = 10f;
-    // public float climbSpeed = 5f;
 
     public bool isGrounded;
     public bool isFall;
@@ -32,6 +24,9 @@ public class PlayerController : MonoBehaviour {
     private RaycastHit2D _hit;
     private RaycastHit2D _backHit;
     private Animator _animator;
+    
+    //UI
+    public GameOverScreen gameOverScreen;
 
     void Start() {
         joystick = GetComponent<Joystick>();
@@ -45,7 +40,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if (isDead || isStopping) return;
+        if (isDead || isStopping) {
+            return;
+        };
 
         // if (canClimb) {
         //     if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
@@ -83,6 +80,7 @@ public class PlayerController : MonoBehaviour {
 
         if (isStopping) {
             _animator.SetTrigger("Dead");
+            GameOver();
             return;
         }
         
@@ -136,6 +134,11 @@ public class PlayerController : MonoBehaviour {
                 _rigid.gravityScale = 30;
             }
         }
+    }
+
+    void GameOver() {
+        gameOverScreen.Setup(10000); 
+        gameObject.GetComponent<PlayerController>().enabled = false;
     }
 
     void Jump() {
