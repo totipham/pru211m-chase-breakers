@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538ae6ee200b84db8a47b5f8a525c8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  realVelocity: 0
+  isStopped: 0
 --- !u!1 &2643363578438143717
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +489,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 34
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 40
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1842,8 +1844,8 @@ Tilemap:
     m_Data: {fileID: -34237083, guid: d062a04c911f745288b77624bde48225, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 1523558370, guid: d062a04c911f745288b77624bde48225, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: 1298057200, guid: d062a04c911f745288b77624bde48225, type: 3}
   - m_RefCount: 6
@@ -1914,8 +1916,8 @@ Tilemap:
     m_Data: {fileID: -137274765, guid: d062a04c911f745288b77624bde48225, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -6225756, guid: d062a04c911f745288b77624bde48225, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1523558370, guid: d062a04c911f745288b77624bde48225, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1918014119, guid: d062a04c911f745288b77624bde48225, type: 3}
   - m_RefCount: 1
