@@ -1220,10 +1220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Obstacle
-    type: Police
-    prefab: {fileID: 846578708047699271, guid: 48bb55ed26a164873a363f6d0494dee8, type: 3}
-    size: 1
   - tag: StartPlatform
     type: Normal
     prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
@@ -1256,6 +1252,14 @@ MonoBehaviour:
     type: Seven
     prefab: {fileID: 2643363578255182533, guid: 36d3e33599f6a47619d6fc2722824d7e, type: 3}
     size: 2
+  - tag: Obstacle
+    type: Police
+    prefab: {fileID: 846578708047699271, guid: 48bb55ed26a164873a363f6d0494dee8, type: 3}
+    size: 2
+  - tag: Obstacle
+    type: Box
+    prefab: {fileID: 3816396421214262071, guid: 0c8c24b716d6e4457ab5c576ffe43a5b, type: 3}
+    size: 2
 --- !u!4 &1335422451
 Transform:
   m_ObjectHideFlags: 0
@@ -1283,8 +1287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eff536f9334cf2a3ca2ea95fccda99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnWait: 0
-  minSpawnWait: 0
+  maxSpawnWait: 4
+  minSpawnWait: 2
 --- !u!1 &1347912113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,6 +2572,10 @@ PrefabInstance:
     - target: {fileID: 4165011439858968310, guid: 973235a0256564301bae04634317f290, type: 3}
       propertyPath: m_Offset.y
       value: -0.7205502
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165011439858968311, guid: 973235a0256564301bae04634317f290, type: 3}
+      propertyPath: isDead
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4165011439858968311, guid: 973235a0256564301bae04634317f290, type: 3}
       propertyPath: gameOverScreen

@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     private RaycastHit2D _hit;
     private RaycastHit2D _backHit;
     private Animator _animator;
-    
+
     //UI
     public GameOverScreen gameOverScreen;
 
@@ -42,34 +42,36 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         if (isDead || isStopping) {
             return;
-        };
+        }
+
+        ;
 
         // if (canClimb) {
         //     if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
         //         isClimbing = true;
         //     }
         // } else {
-            if (isGrounded) {
-                isFall = false;
-                isJumping = false;
-                isClimbing = false;
+        if (isGrounded) {
+            isFall = false;
+            isJumping = false;
+            isClimbing = false;
 
-                //Control: Up
-                if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
-                    isGrounded = false;
-                    Jump();
-                }
-
-                //Control: Down
-                if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0) {
-                    //TODO: Bow Down Animation
-                }
-            } else {
-                //Control: Down
-                if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0) {
-                    isFall = true;
-                }
+            //Control: Up
+            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
+                isGrounded = false;
+                Jump();
             }
+
+            //Control: Down
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0) {
+                //TODO: Bow Down Animation
+            }
+        } else {
+            //Control: Down
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0) {
+                isFall = true;
+            }
+        }
         // }
     }
 
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour {
             GameOver();
             return;
         }
-        
+
         //Player: Is climbing
         // if (isClimbing && canClimb) {
         //     isGrounded = false;
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour {
             // _hit = Physics2D.Raycast(transform.position,
             //     new Vector3(1, 0.5f, 0), 1f);
             // Debug.DrawRay(transform.position, new Vector3(1, 0.5f, 0), Color.green);
-            
+
             _backHit = Physics2D.Raycast(transform.position,
                 new Vector2(0.35f, 1), 0.5f);
             Debug.DrawRay(transform.position, new Vector2(0.35f, 1), Color.yellow);
@@ -112,18 +114,11 @@ public class PlayerController : MonoBehaviour {
             // } else {
             //     canClimb = false;
             // }
-            
+
             if (_backHit.collider) {
                 if (_backHit.collider.CompareTag("Ground")) {
                     StopRunning();
                 }
-            } 
-
-            //Player: Die
-            if (!IsVisibleFromCamera()) {
-                isDead = true;
-                StopRunning();
-                Debug.Log("Is Dead: " + isDead);
             }
 
             transform.position = pos;
@@ -134,10 +129,17 @@ public class PlayerController : MonoBehaviour {
                 _rigid.gravityScale = 30;
             }
         }
+
+        //Player: Die
+        if (transform.position.y < -10) {
+            isDead = true;
+            StopRunning();
+            Debug.Log("Is Dead: " + isDead);
+        }
     }
 
     void GameOver() {
-        gameOverScreen.Setup(10000); 
+        gameOverScreen.Setup(10000);
         gameObject.GetComponent<PlayerController>().enabled = false;
     }
 
@@ -150,7 +152,7 @@ public class PlayerController : MonoBehaviour {
 
     void Climb() {
         Debug.Log("Action: CLIMBING");
-        
+
         velocity = Vector3.zero;
         _rigid.gravityScale = 0;
 
@@ -172,11 +174,17 @@ public class PlayerController : MonoBehaviour {
 
         transform.position = new Vector3(playerPos.x, playerPos.y + 2.1f, playerPos.z);
     }
-    
+
     void StopRunning() {
         Debug.Log("Action: STOP RUNNING");
         velocity = Vector3.zero;
         isStopping = true;
+    }
+
+    public void Dead() {
+        isStopping = true;
+        isDead = true;
+        StopRunning();
     }
 
     void OnCollisionEnter2D(Collision2D other) {
@@ -192,10 +200,10 @@ public class PlayerController : MonoBehaviour {
 
             // if (_hit.collider) {
             //     if (_hit.collider.CompareTag("Ground") && !isClimbing) {
-                    //If right have ground, do stopping
-                    // StopRunning();
-                    
-                    //Animation layoff
+            //If right have ground, do stopping
+            // StopRunning();
+
+            //Animation layoff
             //     }
             // }
         }
