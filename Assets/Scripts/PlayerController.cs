@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -131,16 +132,26 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Player: Die
-        if (transform.position.y < -10) {
+        if (transform.position.y < -6) {
             isDead = true;
             StopRunning();
             Debug.Log("Is Dead: " + isDead);
         }
     }
-
+    
     void GameOver() {
         gameOverScreen.Setup(10000);
         gameObject.GetComponent<PlayerController>().enabled = false;
+    }
+    
+    public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 0.5f) {
+        if (isCollide) {
+            Debug.Log("Animation: SLOW DOWN");
+            _animator.SetTrigger("Collide");
+        }
+        maxVelocity -= minusVelocity;
+        yield return new WaitForSeconds(waitTime);
+        maxVelocity += minusVelocity;
     }
 
     void Jump() {
