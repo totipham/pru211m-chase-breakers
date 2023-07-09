@@ -10,6 +10,10 @@ public class ArmedPoliceController : MonoBehaviour
     public float fireDelay = 3f;
 
     void FixedUpdate () {
+        if (gameObject.transform.position.x < -20) {
+            gameObject.SetActive(false);
+        }
+        
         fireElapsedTime += Time.fixedDeltaTime;
         if (fireElapsedTime >= fireDelay) {
             fireElapsedTime = 0;
@@ -25,14 +29,14 @@ public class ArmedPoliceController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
         bullet.transform.parent = transform.parent;
         //Add velocity to bullet
-        bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+        bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-2, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            other.gameObject.GetComponent<PlayerController>().Dead();
         }
     }
 }

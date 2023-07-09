@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 846578708047699268}
+  - component: {fileID: -7664908062965427560}
   m_Layer: 0
   m_Name: ArmedObstacle
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846578708047699271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5332718, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -32,6 +33,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7664908062965427560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846578708047699271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538ae6ee200b84db8a47b5f8a525c8f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  realVelocity: 0
+  isStopped: 0
 --- !u!1001 &5089774005173859204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49,7 +64,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556637805441518910, guid: 724a7f06623e044bdba97857d23c6838, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0154
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5556637805441518910, guid: 724a7f06623e044bdba97857d23c6838, type: 3}
       propertyPath: m_LocalPosition.y
