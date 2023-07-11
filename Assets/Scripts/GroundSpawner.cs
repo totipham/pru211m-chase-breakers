@@ -16,13 +16,14 @@ public class GroundSpawner : MonoBehaviour {
     private Vector2 _lastEndPosition;
     private ObjectPooling _objectPooling;
     private GameObject _currentPlatform;
-    private bool canGenerateObstacle = false;
-    private bool isGeneratedNextPlatform = false;
+    private bool canGenerateObstacle;
+    private bool isGeneratedNextPlatform;
 
     private List<string> obstacleTypeList;
 
 
     IEnumerator Start() {
+        canGenerateObstacle = false;
         _objectPooling = GetComponent<ObjectPooling>();
         _platformLength = _objectPooling.GetLengthByTag("Platform");
         _currentPlatform = GenerateStartPlatform();
@@ -43,6 +44,7 @@ public class GroundSpawner : MonoBehaviour {
     void FixedUpdate() {
         //FIXME: Change appropriate position
         Vector2 pos = _currentPlatform.transform.position;
+        isGeneratedNextPlatform = false;
         if (pos.x <= SPAWN_DISTANCE) {
             _currentPlatform = GenerateNextPlatform(new Vector2(pos.x + PLATFORM_GAP, pos.y));
             if (canGenerateObstacle && isGeneratedNextPlatform) {
@@ -52,19 +54,11 @@ public class GroundSpawner : MonoBehaviour {
     }
 
     void GenerateObstacle() {
-        isGeneratedNextPlatform = false;
         if (_obstacleLength > 1) {
             int random = _obstacleLength == 1 ? 0 : Random.Range(0, _obstacleLength);
-            // while (_lastObstaclePartIndex != random) {
-            // random = _obstacleLength == 1 ? 0 : Random.Range(0, _obstacleLength);
             string obstacleType = obstacleTypeList[random];
-            Debug.Log("Obstacle: Generating obstacle, type: " + obstacleType);
-            GameObject obstacle = _objectPooling.SpawnFromPoolByType("Obstacle", transform.position,
-                Quaternion.identity, obstacleType);
-
-            //FIXME: Change appropriate position
-            // Vector2 pos = _currentPlatform.transform.position;
-            // obstacle.transform.position = new Vector2(pos.x, pos.y);
+            Debug.Log("OBSTACLE: " + _currentPlatform.transform.name + " | " + obstacleType);
+            
 
             int childCount = _currentPlatform.transform.childCount;
             if (childCount <= 1) {
@@ -82,10 +76,10 @@ public class GroundSpawner : MonoBehaviour {
             float endPoint = posX + areaTransform.localScale.x;
             float randomPosX = Random.Range(startPoint, endPoint);
 
-            obstacle.transform.position = new Vector2(posX, posY + 1f);
+            Vector2 spawnPos = new Vector2(posX, posY + 1f);
+            _objectPooling.SpawnFromPoolByType("Obstacle", spawnPos,
+                Quaternion.identity, obstacleType);
 
-            _lastObstaclePartIndex = random;
-            // }
         } else {
             Debug.LogWarning("Obstacle length is less than 1, must add more obstacles to the pool");
         }
@@ -110,7 +104,7 @@ public class GroundSpawner : MonoBehaviour {
             while (spawnPlatform == null) {
                 var random = typeList.Count == 1 ? 0 : Random.Range(0, typeList.Count);
                 string type = typeList[random];
-                // Debug.Log("Type: " + type + " is chosen");
+                Debug.Log("OBSTACLE: " + "Type: " + type);
                 spawnPlatform =
                     _objectPooling.SpawnFromPoolByType("Platform", nextPlatformPosition, Quaternion.identity, type);
             }

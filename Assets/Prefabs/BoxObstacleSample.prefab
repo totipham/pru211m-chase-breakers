@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3816396421214262056}
   - component: {fileID: 3816396421214262057}
   - component: {fileID: 3816396421214262070}
-  - component: {fileID: 3816396421214262058}
   - component: {fileID: 2750802969203977206}
+  - component: {fileID: 1948549006816180042}
   m_Layer: 0
   m_Name: BoxObstacleSample
   m_TagString: Untagged
@@ -135,20 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3816396421214262058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3816396421214262071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538ae6ee200b84db8a47b5f8a525c8f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  realVelocity: 0
-  isStopped: 0
 --- !u!114 &2750802969203977206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +147,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c61ab154fca4e2c9158122fab52970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowDownVelocity: 5
+  slowDownTime: 1
+--- !u!114 &1948549006816180042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816396421214262071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84baea3b51acc4b9c8400a9dcc264261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  realVelocity: 0
+  isStopped: 0

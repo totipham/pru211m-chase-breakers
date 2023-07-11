@@ -23,6 +23,7 @@ public class ObjectPooling : MonoBehaviour {
     public class PoolData {
         public string tag;
         public int activeObjectCount;
+        public List<SerializableVector> objectPositions;
         public List<Quaternion> objectRotations;
     }
 
@@ -52,6 +53,7 @@ public class ObjectPooling : MonoBehaviour {
 
             for (int i = 0; i < pool.size; i++) {
                 var prefab = pool.prefab;
+                
                 GameObject obj = Instantiate(prefab);
                 obj.transform.parent = transform;
                 obj.transform.name = $"{pool.tag}_{pool.type}";
@@ -133,6 +135,13 @@ public class ObjectPooling : MonoBehaviour {
 
         for (int i = 0; i < _poolDictionary[tag].Count; i++) {
             if (!_poolDictionary[tag][i].activeInHierarchy && _poolDictionary[tag][i].name.Equals($"{tag}_{type}")) {
+                
+                //Check if _poolDictionary[tag][i] is not null
+                if (_poolDictionary[tag][i] == null) {
+                    Debug.LogWarning("Object at index " + i + " is null.");
+                    return null;
+                }
+                
                 GameObject objectToSpawn = _poolDictionary[tag][i];
 
                 objectToSpawn.SetActive(true);
@@ -200,4 +209,99 @@ public class ObjectPooling : MonoBehaviour {
     //         }
     //     }
     // }
+    public void SaveObjectPooling (string fileName)
+    {
+        ObjectPoolingData objectPoolingData = new ObjectPoolingData();
+        objectPoolingData.poolDataList = new List<PoolData>();
+
+        foreach (Pool pool in pools)
+        {
+            PoolData poolData = new PoolData();
+            poolData.tag = pool.tag;
+            poolData.activeObjectCount = GetActiveObjectCount(pool.tag);
+            poolData.objectPositions = new List<SerializableVector>();
+            poolData.objectRotations = new List<Quaternion>();
+
+            foreach (GameObject obj in _poolDictionary[pool.tag])
+            {
+                if (obj.activeInHierarchy)
+                {
+                    poolData.objectPositions.Add(obj.transform.position);
+                    poolData.objectRotations.Add(obj.transform.rotation);
+                }
+            }
+
+            objectPoolingData.poolDataList.Add(poolData);
+        }
+
+        string jsonData = JsonUtility.ToJson(objectPoolingData, true);
+        System.IO.File.WriteAllText(fileName, jsonData);
+
+        Debug.Log("Game saved to: " + fileName);
+    }
+
+    private int GetActiveObjectCount(string tag)
+    {
+        int count = 0;
+
+        if (_poolDictionary.ContainsKey(tag))
+        {
+            foreach (GameObject obj in _poolDictionary[tag])
+            {
+                if (obj.activeInHierarchy)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+    
+    public void LoadGame(string fileName)
+    {
+        if (System.IO.File.Exists(fileName))
+        {
+            string jsonData = System.IO.File.ReadAllText(fileName);
+            ObjectPoolingData objectPoolingData = JsonUtility.FromJson<ObjectPoolingData>(jsonData);
+
+            if (objectPoolingData != null)
+            {
+                foreach (PoolData poolData in objectPoolingData.poolDataList)
+                {
+                    if (_poolDictionary.ContainsKey(poolData.tag))
+                    {
+                        foreach (GameObject obj in _poolDictionary[poolData.tag])
+                        {
+                            obj.SetActive(false);
+                        }
+
+                        for (int i = 0; i < poolData.activeObjectCount; i++)
+                        {
+                            GameObject obj = SpawnFromPool(poolData.tag, Vector3.zero, Quaternion.identity);
+                            if (obj != null && i < poolData.objectPositions.Count && i < poolData.objectRotations.Count)
+                            {
+                                obj.transform.position = poolData.objectPositions[i];
+                                obj.transform.rotation = poolData.objectRotations[i];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Pool with tag " + poolData.tag + " doesn't exist.");
+                    }
+                }
+
+                Debug.Log("Game loaded from: " + fileName);
+            }
+            else
+            {
+                Debug.LogWarning("Failed to load game data from: " + fileName);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("File not found: " + fileName);
+        }
+    }
 }

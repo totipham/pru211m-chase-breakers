@@ -1,28 +1,36 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.XR;
 using UnityEngine;
 
-public class ArmedPoliceController : MonoBehaviour
-{
+public class ArmedPoliceController : MonoBehaviour {
     public GameObject bulletPrefab;
     float fireElapsedTime = 0;
     public float fireDelay = 3f;
 
-    void FixedUpdate () {
-        if (gameObject.transform.position.x < -20) {
-            gameObject.SetActive(false);
+    public bool isCollideWithPolice;
+    private Animator _animator;
+
+
+    void Start() {
+        _animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate() {
+        if (isCollideWithPolice) {
+            _animator.SetTrigger("Climb");
+            isCollideWithPolice = false;
         }
-        
+
         fireElapsedTime += Time.fixedDeltaTime;
         if (fireElapsedTime >= fireDelay) {
             fireElapsedTime = 0;
             Fire();
         }
     }
-    
-    void Fire()
-    {
+
+    void Fire() {
         //Instantiate bullet
         Vector2 bulletPos = transform.position;
         bulletPos.x -= 0.2f;
@@ -32,10 +40,8 @@ public class ArmedPoliceController : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-2, 0);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
             other.gameObject.GetComponent<PlayerController>().Dead();
         }
     }
