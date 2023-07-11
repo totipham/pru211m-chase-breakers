@@ -53,6 +53,7 @@ public class ObjectPooling : MonoBehaviour {
 
             for (int i = 0; i < pool.size; i++) {
                 var prefab = pool.prefab;
+                
                 GameObject obj = Instantiate(prefab);
                 obj.transform.parent = transform;
                 obj.transform.name = $"{pool.tag}_{pool.type}";
@@ -134,6 +135,13 @@ public class ObjectPooling : MonoBehaviour {
 
         for (int i = 0; i < _poolDictionary[tag].Count; i++) {
             if (!_poolDictionary[tag][i].activeInHierarchy && _poolDictionary[tag][i].name.Equals($"{tag}_{type}")) {
+                
+                //Check if _poolDictionary[tag][i] is not null
+                if (_poolDictionary[tag][i] == null) {
+                    Debug.LogWarning("Object at index " + i + " is null.");
+                    return null;
+                }
+                
                 GameObject objectToSpawn = _poolDictionary[tag][i];
 
                 objectToSpawn.SetActive(true);
