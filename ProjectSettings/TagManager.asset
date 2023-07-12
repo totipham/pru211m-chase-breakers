@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - Ground
+  - Ground2
+  - DistanceScored
   layers:
   - Default
   - TransparentFX

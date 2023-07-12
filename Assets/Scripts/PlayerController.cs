@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     public Joystick joystick;
     private Rigidbody2D _rigid;
     private Camera _camera;
 
     public Vector2 velocity;
     public float jumpVelocity;
+    public float distance = 0;
 
     //FIXME: I am dynamic change
     public float groundHeight = -2f;
@@ -29,7 +31,8 @@ public class PlayerController : MonoBehaviour {
     //UI
     public GameOverScreen gameOverScreen;
 
-    void Start() {
+    void Start()
+    {
         joystick = GetComponent<Joystick>();
         _rigid = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -40,8 +43,10 @@ public class PlayerController : MonoBehaviour {
         canClimb = false;
     }
 
-    void Update() {
-        if (isDead || isStopping) {
+    void Update()
+    {
+        if (isDead || isStopping)
+        {
             return;
         }
 
@@ -52,36 +57,44 @@ public class PlayerController : MonoBehaviour {
         //         isClimbing = true;
         //     }
         // } else {
-        if (isGrounded) {
+        if (isGrounded)
+        {
             isFall = false;
             isJumping = false;
             isClimbing = false;
 
             //Control: Up
-            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
+            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0)
+            {
                 isGrounded = false;
                 Jump();
             }
 
             //Control: Down
-            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0) {
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0)
+            {
                 //TODO: Bow Down Animation
             }
-        } else {
+        }
+        else
+        {
             //Control: Down
-            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0) {
+            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0)
+            {
                 isFall = true;
             }
         }
         // }
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         //Animation: Set Animation
         _animator.SetBool("Is Jumping", isJumping);
         _animator.SetBool("Is Falling", isFall);
 
-        if (isStopping) {
+        if (isStopping)
+        {
             _animator.SetTrigger("Dead");
             GameOver();
             return;
@@ -96,7 +109,8 @@ public class PlayerController : MonoBehaviour {
         // }
 
         //Player: Is in the ground
-        if (isGrounded) {
+        if (isGrounded)
+        {
             Vector2 pos = transform.position;
             velocity.x = maxVelocity;
 
@@ -116,36 +130,47 @@ public class PlayerController : MonoBehaviour {
             //     canClimb = false;
             // }
 
-            if (_backHit.collider) {
-                if (_backHit.collider.CompareTag("Ground")) {
+            if (_backHit.collider)
+            {
+                if (_backHit.collider.CompareTag("Ground"))
+                {
                     StopRunning();
                 }
             }
 
             transform.position = pos;
-        } else //Player: Is in the air
+        }
+        else //Player: Is in the air
         {
             //Player: Fall down
-            if (isFall) {
+            if (isFall)
+            {
                 _rigid.gravityScale = 30;
             }
         }
 
         //Player: Die
-        if (transform.position.y < -6) {
+        if (transform.position.y < -6)
+        {
             isDead = true;
             StopRunning();
             Debug.Log("Is Dead: " + isDead);
         }
+
+        //Player: dicstance
+        distance += (velocity.x + Time.fixedDeltaTime) / 50;
     }
-    
-    void GameOver() {
-        gameOverScreen.Setup(10000);
+
+    void GameOver()
+    {
+        gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
     }
-    
-    public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 0.5f) {
-        if (isCollide) {
+
+    public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 0.5f)
+    {
+        if (isCollide)
+        {
             Debug.Log("Animation: SLOW DOWN");
             _animator.SetTrigger("Collide");
         }
@@ -154,14 +179,16 @@ public class PlayerController : MonoBehaviour {
         maxVelocity += minusVelocity;
     }
 
-    void Jump() {
+    void Jump()
+    {
         Debug.Log("Action: JUMPING");
         isJumping = true;
         _rigid.velocity = Vector3.zero;
         _rigid.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
     }
 
-    void Climb() {
+    void Climb()
+    {
         Debug.Log("Action: CLIMBING");
 
         velocity = Vector3.zero;
@@ -175,9 +202,12 @@ public class PlayerController : MonoBehaviour {
 
         Debug.DrawRay(playerPos, Vector2.right, Color.red);
 
-        if (climbHit.collider) {
+        if (climbHit.collider)
+        {
             //KEEP THIS HERE
-        } else {
+        }
+        else
+        {
             transform.position = new Vector3(playerPos.x + 0.1f, playerPos.y, playerPos.z);
             canClimb = false;
             isGrounded = true;
@@ -186,22 +216,27 @@ public class PlayerController : MonoBehaviour {
         transform.position = new Vector3(playerPos.x, playerPos.y + 2.1f, playerPos.z);
     }
 
-    void StopRunning() {
+    void StopRunning()
+    {
         Debug.Log("Action: STOP RUNNING");
         velocity = Vector3.zero;
         isStopping = true;
     }
 
-    public void Dead() {
+    public void Dead()
+    {
         isStopping = true;
         isDead = true;
         StopRunning();
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
+    void OnCollisionEnter2D(Collision2D other)
+    {
         Debug.Log("COLLIDE: " + other.gameObject.name);
-        if (other.gameObject.CompareTag("Ground")) {
-            if (!isGrounded) {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            if (!isGrounded)
+            {
                 isGrounded = true;
                 _rigid.gravityScale = 10;
             }
@@ -220,7 +255,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    bool IsVisibleFromCamera() {
+    bool IsVisibleFromCamera()
+    {
         Vector3 viewportPosition =
             _camera.WorldToViewportPoint(transform
                 .position);
