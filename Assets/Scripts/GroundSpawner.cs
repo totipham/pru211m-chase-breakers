@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GroundSpawner : MonoBehaviour {
+public class GroundSpawner : MonoBehaviour
+{
     private const float PLATFORM_GAP = 28f;
     private const float SPAWN_DISTANCE = -5f;
 
@@ -16,13 +17,15 @@ public class GroundSpawner : MonoBehaviour {
     private Vector2 _lastEndPosition;
     private ObjectPooling _objectPooling;
     private GameObject _currentPlatform;
-    private bool canGenerateObstacle = false;
-    private bool isGeneratedNextPlatform = false;
+    private bool canGenerateObstacle;
+    private bool isGeneratedNextPlatform;
 
     private List<string> obstacleTypeList;
 
 
-    IEnumerator Start() {
+    IEnumerator Start()
+    {
+        canGenerateObstacle = false;
         _objectPooling = GetComponent<ObjectPooling>();
         _platformLength = _objectPooling.GetLengthByTag("Platform");
         _currentPlatform = GenerateStartPlatform();
@@ -40,38 +43,37 @@ public class GroundSpawner : MonoBehaviour {
         // }
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         //FIXME: Change appropriate position
         Vector2 pos = _currentPlatform.transform.position;
-        if (pos.x <= SPAWN_DISTANCE) {
+        isGeneratedNextPlatform = false;
+        if (pos.x <= SPAWN_DISTANCE)
+        {
             _currentPlatform = GenerateNextPlatform(new Vector2(pos.x + PLATFORM_GAP, pos.y));
-            if (canGenerateObstacle && isGeneratedNextPlatform) {
+            if (canGenerateObstacle && isGeneratedNextPlatform)
+            {
                 GenerateObstacle();
             }
         }
     }
 
-    void GenerateObstacle() {
-        isGeneratedNextPlatform = false;
-        if (_obstacleLength > 1) {
+    void GenerateObstacle()
+    {
+        if (_obstacleLength > 1)
+        {
             int random = _obstacleLength == 1 ? 0 : Random.Range(0, _obstacleLength);
-            // while (_lastObstaclePartIndex != random) {
-            // random = _obstacleLength == 1 ? 0 : Random.Range(0, _obstacleLength);
             string obstacleType = obstacleTypeList[random];
-            Debug.Log("Obstacle: Generating obstacle, type: " + obstacleType);
-            GameObject obstacle = _objectPooling.SpawnFromPoolByType("Obstacle", transform.position,
-                Quaternion.identity, obstacleType);
+            Debug.Log("OBSTACLE: " + _currentPlatform.transform.name + " | " + obstacleType);
 
-            //FIXME: Change appropriate position
-            // Vector2 pos = _currentPlatform.transform.position;
-            // obstacle.transform.position = new Vector2(pos.x, pos.y);
 
             int childCount = _currentPlatform.transform.childCount;
-            if (childCount <= 1) {
+            if (childCount <= 1)
+            {
                 Debug.LogWarning("Platform has no area to spawn obstacle");
                 return;
             }
-            
+
             int randomPos = Random.Range(1, childCount);
 
             Transform areaTransform = _currentPlatform.transform.GetChild(randomPos).transform;
@@ -82,20 +84,24 @@ public class GroundSpawner : MonoBehaviour {
             float endPoint = posX + areaTransform.localScale.x;
             float randomPosX = Random.Range(startPoint, endPoint);
 
-            obstacle.transform.position = new Vector2(posX, posY + 1f);
+            Vector2 spawnPos = new Vector2(posX, posY + 1f);
+            _objectPooling.SpawnFromPoolByType("Obstacle", spawnPos,
+                Quaternion.identity, obstacleType);
 
-            _lastObstaclePartIndex = random;
-            // }
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Obstacle length is less than 1, must add more obstacles to the pool");
         }
     }
 
-    private GameObject GenerateStartPlatform() {
+    private GameObject GenerateStartPlatform()
+    {
         return _objectPooling.SpawnFromPoolByType("StartPlatform", new Vector2(-6, -4), Quaternion.identity, "Normal");
     }
 
-    private GameObject GenerateNextPlatform(Vector2 nextPlatformPosition) {
+    private GameObject GenerateNextPlatform(Vector2 nextPlatformPosition)
+    {
         GameObject spawnPlatform = null;
         List<string> typeList = _objectPooling.GetTypeListByTag("Platform");
 
@@ -106,11 +112,13 @@ public class GroundSpawner : MonoBehaviour {
 
         // Debug.Log("Type list length: " + typeList.Count);
 
-        if (_platformLength > 0) {
-            while (spawnPlatform == null) {
+        if (_platformLength > 0)
+        {
+            while (spawnPlatform == null)
+            {
                 var random = typeList.Count == 1 ? 0 : Random.Range(0, typeList.Count);
                 string type = typeList[random];
-                // Debug.Log("Type: " + type + " is chosen");
+                Debug.Log("OBSTACLE: " + "Type: " + type);
                 spawnPlatform =
                     _objectPooling.SpawnFromPoolByType("Platform", nextPlatformPosition, Quaternion.identity, type);
             }

@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-
 public class PlayerController : MonoBehaviour
 {
     public Joystick joystick;
@@ -23,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool isClimbing;
     public bool isJumping;
     public bool isStopping;
+    public bool isSlowDown;
 
     private RaycastHit2D _hit;
     private RaycastHit2D _backHit;
@@ -49,8 +47,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-        ;
 
         // if (canClimb) {
         //     if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0) {
@@ -118,9 +114,9 @@ public class PlayerController : MonoBehaviour
             //     new Vector3(1, 0.5f, 0), 1f);
             // Debug.DrawRay(transform.position, new Vector3(1, 0.5f, 0), Color.green);
 
-            _backHit = Physics2D.Raycast(transform.position,
+            _backHit = Physics2D.Raycast(pos,
                 new Vector2(0.35f, 1), 0.5f);
-            Debug.DrawRay(transform.position, new Vector2(0.35f, 1), Color.yellow);
+            Debug.DrawRay(pos, new Vector2(0.35f, 1), Color.yellow);
 
             // if (_hit.collider) {
             //     if (_hit.collider.CompareTag("Ground")) {
@@ -137,8 +133,6 @@ public class PlayerController : MonoBehaviour
                     StopRunning();
                 }
             }
-
-            transform.position = pos;
         }
         else //Player: Is in the air
         {
@@ -167,8 +161,9 @@ public class PlayerController : MonoBehaviour
         gameObject.GetComponent<PlayerController>().enabled = false;
     }
 
-    public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 0.5f)
+    public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
     {
+        isSlowDown = true;
         if (isCollide)
         {
             Debug.Log("Animation: SLOW DOWN");
@@ -176,6 +171,7 @@ public class PlayerController : MonoBehaviour
         }
         maxVelocity -= minusVelocity;
         yield return new WaitForSeconds(waitTime);
+        isSlowDown = false;
         maxVelocity += minusVelocity;
     }
 
