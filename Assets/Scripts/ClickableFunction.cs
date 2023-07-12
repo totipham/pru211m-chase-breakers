@@ -1,3 +1,8 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+
 public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] private Image _img;
