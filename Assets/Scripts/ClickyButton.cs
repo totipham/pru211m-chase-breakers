@@ -11,7 +11,7 @@ public class ClickyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public void StartNewGame() {
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
-        Debug.Log("Load new game");
+        Time.timeScale = 1;
     }
 
     public void OnPointerUp(PointerEventData eventData) {
@@ -20,5 +20,20 @@ public class ClickyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 
     public void OnPointerDown(PointerEventData eventData) {
        _img.sprite = _press; 
+    }
+    public void BackToMenu()
+    {
+        //Load scene
+        SceneManager.LoadScene("Scenes/Menu");
+    }
+    
+    public void SaveAndBackToMenu()
+    {
+        //Save game
+        
+        
+        //Load scene
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Scenes/Menu");
     }
 }
