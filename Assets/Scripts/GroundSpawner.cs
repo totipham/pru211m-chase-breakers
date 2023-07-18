@@ -74,7 +74,7 @@ public class GroundSpawner : MonoBehaviour {
             float posY = areaPos.y;
             float startPoint = posX;
             float endPoint = posX + areaTransform.localScale.x;
-            float randomPosX = Random.Range(startPoint, endPoint);
+            
 
             Vector2 spawnPos = new Vector2(posX, posY + 1f);
             _objectPooling.SpawnFromPoolByType("Obstacle", spawnPos,
