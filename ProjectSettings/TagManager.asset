@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - ObstaclePolice
   - Police
+  - Ground2
+  - DistanceScored
   layers:
   - Default
   - TransparentFX

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
@@ -11,29 +9,34 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
     [SerializeField] private Sprite _normal, _press;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _resumeButton;
-    
-    public void StartNewGame() {
+
+    public void StartNewGame()
+    {
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
         Debug.Log("Load new game");
     }
 
-    public void OnPointerUp(PointerEventData eventData) {
-       _img.sprite = _normal; 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        _img.sprite = _normal;
     }
 
-    public void OnPointerDown(PointerEventData eventData) {
-       _img.sprite = _press; 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        _img.sprite = _press;
     }
-    
-    public void PauseGame() {
+
+    public void PauseGame()
+    {
         Debug.Log("Pause game");
         Time.timeScale = 0;
         _resumeButton.SetActive(true);
         _pauseButton.SetActive(false);
     }
-    
-    public void ResumeGame() {
+
+    public void ResumeGame()
+    {
         Debug.Log("Resume game");
         Time.timeScale = 1;
         _resumeButton.SetActive(false);
