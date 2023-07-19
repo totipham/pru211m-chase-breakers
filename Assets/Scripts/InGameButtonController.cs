@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,10 @@ public class InGameButtonController : MonoBehaviour, IPointerUpHandler, IPointer
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private SaveSystem _saveSystem;
+
+    private void Start() {
+        _saveSystem = new SaveSystem();
+    }
 
     public void StartNewGame()
     {
