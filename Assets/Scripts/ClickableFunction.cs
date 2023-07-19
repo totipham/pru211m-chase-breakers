@@ -9,6 +9,7 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
     [SerializeField] private Sprite _normal, _press;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _resumeButton;
+    [SerializeField] private GameObject _pauseMenu;
 
     public void StartNewGame()
     {
@@ -33,6 +34,7 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
         Time.timeScale = 0;
         _resumeButton.SetActive(true);
         _pauseButton.SetActive(false);
+        _pauseMenu.SetActive(true);
     }
 
     public void ResumeGame()
@@ -41,5 +43,7 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
         Time.timeScale = 1;
         _resumeButton.SetActive(false);
         _pauseButton.SetActive(true);
+        _pauseMenu.SetActive(false);
     }
+    
 }
