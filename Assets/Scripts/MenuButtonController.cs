@@ -37,6 +37,9 @@ public class MenuButtonController : MonoBehaviour, IPointerUpHandler, IPointerDo
         // objectPooling.SaveObjectPooling("data.dat");
         
         
+        //Save game
+        _saveSystem.SaveGame();
+        
         //Load scene
         BackToMenu();
     }
@@ -45,15 +48,15 @@ public class MenuButtonController : MonoBehaviour, IPointerUpHandler, IPointerDo
         Time.timeScale = 1;
         var op = SceneManager.LoadSceneAsync("Scenes/GameScene");
         op.completed += (AsyncOperation obj) => {
+            _saveSystem.LoadGameFromSave();
             
-            
-            GameObject platformPooling = GameObject.Find("PlatformPooling");
-            ObjectPooling objectPooling = platformPooling.GetComponent<ObjectPooling>();
-            GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
-            _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-            _playerController.distance = PlayerPrefs.GetFloat("Score");
-            groundSpawner.isContinueGame = true;
-            objectPooling.LoadGame("data.dat");
+            // GameObject platformPooling = GameObject.Find("PlatformPooling");
+            // ObjectPooling objectPooling = platformPooling.GetComponent<ObjectPooling>();
+            // GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
+            // _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+            // _playerController.distance = PlayerPrefs.GetFloat("Score");
+            // groundSpawner.isContinueGame = true;
+            // objectPooling.LoadGame("data.dat");
         };
     }
 }
