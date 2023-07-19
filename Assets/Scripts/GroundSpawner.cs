@@ -5,27 +5,27 @@ using Random = UnityEngine.Random;
 
 public class GroundSpawner : MonoBehaviour
 {
-    private const float PLATFORM_GAP = 28f;
-    private const float SPAWN_DISTANCE = -5f;
+    private const float PlatformGap = 28f;
+    private const float SpawnDistance = -5f;
 
     private int _obstacleLength;
     private int _lastObstaclePartIndex;
     private Vector2 _lastEndPosition;
     private ObjectPooling _objectPooling;
     private GameObject _currentPlatform;
-    private bool canGenerateObstacle;
-    private bool isGeneratedNextPlatform;
+    private bool _canGenerateObstacle;
+    private bool _isGeneratedNextPlatform;
     public bool isContinueGame = false;
 
-    private List<string> obstacleNameList;
+    private List<string> _obstacleNameList;
 
 
     IEnumerator Start()
     {
-        canGenerateObstacle = false;
+        _canGenerateObstacle = false;
         _objectPooling = GetComponent<ObjectPooling>();
-        obstacleNameList = _objectPooling.GetTypeListByTag("Obstacle");
-        _obstacleLength = obstacleNameList.Count;
+        _obstacleNameList = _objectPooling.GetTypeListByTag("Obstacle");
+        _obstacleLength = _obstacleNameList.Count;
         
         if (!isContinueGame) {
             _currentPlatform = GenerateStartPlatform();
@@ -34,19 +34,19 @@ public class GroundSpawner : MonoBehaviour
             _currentPlatform = _objectPooling.GetFirstActiveGameObject("Platform");
         }
         
-        canGenerateObstacle = true;
+        _canGenerateObstacle = true;
     }
 
     void FixedUpdate()
     {
         //FIXME: Change appropriate position
         Vector2 pos = _currentPlatform.transform.position;
-        isGeneratedNextPlatform = false;
-        if (pos.x <= SPAWN_DISTANCE)
+        _isGeneratedNextPlatform = false;
+        if (pos.x <= SpawnDistance)
         {
             Debug.Log("Generate next platform");
-            _currentPlatform = GenerateNextPlatform(new Vector2(pos.x + PLATFORM_GAP, pos.y));
-            if (canGenerateObstacle && isGeneratedNextPlatform)
+            _currentPlatform = GenerateNextPlatform(new Vector2(pos.x + PlatformGap, pos.y));
+            if (_canGenerateObstacle && _isGeneratedNextPlatform)
             {
                 GenerateObstacle();
             }
@@ -58,7 +58,7 @@ public class GroundSpawner : MonoBehaviour
         if (_obstacleLength > 1)
         {
             int random = _obstacleLength == 1 ? 0 : Random.Range(0, _obstacleLength);
-            string obstacleName = obstacleNameList[random];
+            string obstacleName = _obstacleNameList[random];
             Debug.Log("OBSTACLE: " + _currentPlatform.transform.name + " | " + obstacleName);
 
 
@@ -122,7 +122,7 @@ public class GroundSpawner : MonoBehaviour
             }
         }
 
-        isGeneratedNextPlatform = true;
+        _isGeneratedNextPlatform = true;
         return spawnPlatform;
     }
 }
