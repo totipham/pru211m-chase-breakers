@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
     //UI
     public GameOverScreen gameOverScreen;
 
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource gameOverSound;
+
     void Start()
     {
         joystick = GetComponent<Joystick>();
@@ -66,6 +69,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0)
             {
                 isGrounded = false;
+                jumpSound.Play();
                 Jump();
             }
 
@@ -162,6 +166,7 @@ public class PlayerController : MonoBehaviour
     {
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
+        gameOverSound.Play();
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
@@ -196,8 +201,7 @@ public class PlayerController : MonoBehaviour
         Vector3 playerPos = transform.position;
 
         //Raycast check if player is in the ground
-        RaycastHit2D climbHit = Physics2D.Raycast(playerPos,
-            Vector2.right, 0.1f);
+        RaycastHit2D climbHit = Physics2D.Raycast(playerPos, Vector2.right, 0.1f);
 
         Debug.DrawRay(playerPos, Vector2.right, Color.red);
 
