@@ -21,7 +21,7 @@ public class ObjectPooling : MonoBehaviour {
 
     [Serializable]
     public class PoolData {
-        public string type;
+        public string objName;
         public int activeObjectCount;
         public List<SerializableVector> objectPositions;
         public List<Quaternion> objectRotations;
@@ -86,7 +86,20 @@ public class ObjectPooling : MonoBehaviour {
                 return objectToSpawn;
             }
         }
+        return null;
+    }
     
+    public GameObject GetFirstActiveGameObject(String tag) {
+        //Loop through all object in pool check if name start by tag string
+        foreach (KeyValuePair<string, List<GameObject>> entry in _poolDictionary) {
+            if (entry.Key.StartsWith(tag)) {
+                foreach (GameObject obj in entry.Value) {
+                    if (obj.activeInHierarchy) {
+                        return obj;
+                    }
+                }
+            }
+        }
         return null;
     }
 
@@ -124,34 +137,34 @@ public class ObjectPooling : MonoBehaviour {
     //     return objectToSpawn;
     // }
 
-    public GameObject SpawnFromPoolByType(string tag, Vector3 position, Quaternion rotation, string type) {
-        String objName = $"{tag}_{type}";
-        if (!_poolDictionary.ContainsKey(objName)) {
-            Debug.LogWarning("Pool with tag " + objName + " doesn't exist.");
-            return null;
-        }
-
-        for (int i = 0; i < _poolDictionary[objName].Count; i++) {
-            if (!_poolDictionary[objName][i].activeInHierarchy) {
-                
-                //Check if _poolDictionary[tag][i] is not null
-                if (_poolDictionary[objName][i] == null) {
-                    Debug.LogWarning("Object at index " + i + " is null.");
-                    return null;
-                }
-                
-                GameObject objectToSpawn = _poolDictionary[objName][i];
-
-                objectToSpawn.SetActive(true);
-                objectToSpawn.transform.position = position;
-                objectToSpawn.transform.rotation = rotation;
-
-                return objectToSpawn;
-            }
-        }
-
-        return null;
-    }
+    // public GameObject SpawnFromPoolByType(string tag, Vector3 position, Quaternion rotation, string type) {
+    //     String objName = $"{tag}_{type}";
+    //     if (!_poolDictionary.ContainsKey(objName)) {
+    //         Debug.LogWarning("Pool with tag " + objName + " doesn't exist.");
+    //         return null;
+    //     }
+    //
+    //     for (int i = 0; i < _poolDictionary[objName].Count; i++) {
+    //         if (!_poolDictionary[objName][i].activeInHierarchy) {
+    //             
+    //             //Check if _poolDictionary[tag][i] is not null
+    //             if (_poolDictionary[objName][i] == null) {
+    //                 Debug.LogWarning("Object at index " + i + " is null.");
+    //                 return null;
+    //             }
+    //             
+    //             GameObject objectToSpawn = _poolDictionary[objName][i];
+    //
+    //             objectToSpawn.SetActive(true);
+    //             objectToSpawn.transform.position = position;
+    //             objectToSpawn.transform.rotation = rotation;
+    //
+    //             return objectToSpawn;
+    //         }
+    //     }
+    //
+    //     return null;
+    // }
 
     public List<string> GetTypeListByTag(string tag) {
         List<string> typeList = new List<string>();
@@ -188,14 +201,14 @@ public class ObjectPooling : MonoBehaviour {
     //     StartCoroutine(DestroyObjectCoroutine(tag, poolDictionary[tag][index], timeToDestroy));
     // }
 
-    public int GetLengthByTag(string tag) {
-        if (!_poolDictionary.ContainsKey(tag)) {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
-            return 0;
-        }
-
-        return _poolDictionary[tag].Count;
-    }
+    // public int GetLengthByTag(string tag) {
+    //     if (!_poolDictionary.ContainsKey(tag)) {
+    //         Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+    //         return 0;
+    //     }
+    //
+    //     return _poolDictionary[tag].Count;
+    // }
 
     // IEnumerator DestroyObjectCoroutine(string tag, GameObject objectToDestroy, float timeToDestroy) {
     //     yield return new WaitForSeconds(timeToDestroy);
@@ -214,13 +227,17 @@ public class ObjectPooling : MonoBehaviour {
 
         foreach (Pool pool in pools)
         {
+            string objName = $"{pool.tag}_{pool.type}";
             PoolData poolData = new PoolData();
-            poolData.type = pool.type;
-            poolData.activeObjectCount = GetActiveObjectCount(pool.tag);
+            // poolData.type = pool.type;
+            // poolData.activeObjectCount = GetActiveObjectCount(pool.tag);
+            poolData.objName = objName;
+            poolData.activeObjectCount = GetActiveObjectCount(objName);
+            
             poolData.objectPositions = new List<SerializableVector>();
             poolData.objectRotations = new List<Quaternion>();
 
-            foreach (GameObject obj in _poolDictionary[pool.tag])
+            foreach (GameObject obj in _poolDictionary[objName])
             {
                 if (obj.activeInHierarchy)
                 {
@@ -238,13 +255,13 @@ public class ObjectPooling : MonoBehaviour {
         Debug.Log("Game saved to: " + fileName);
     }
 
-    private int GetActiveObjectCount(string tag)
+    private int GetActiveObjectCount(string objName)
     {
         int count = 0;
 
-        if (_poolDictionary.ContainsKey(tag))
+        if (_poolDictionary.ContainsKey(objName))
         {
-            foreach (GameObject obj in _poolDictionary[tag])
+            foreach (GameObject obj in _poolDictionary[objName])
             {
                 if (obj.activeInHierarchy)
                 {
@@ -267,16 +284,16 @@ public class ObjectPooling : MonoBehaviour {
             {
                 foreach (PoolData poolData in objectPoolingData.poolDataList)
                 {
-                    if (_poolDictionary.ContainsKey(poolData.type))
+                    if (_poolDictionary.ContainsKey(poolData.objName))
                     {
-                        foreach (GameObject obj in _poolDictionary[poolData.type])
+                        foreach (GameObject obj in _poolDictionary[poolData.objName])
                         {
                             obj.SetActive(false);
                         }
 
                         for (int i = 0; i < poolData.activeObjectCount; i++)
                         {
-                            GameObject obj = SpawnFromPool(poolData.type, Vector3.zero, Quaternion.identity);
+                            GameObject obj = SpawnFromPool(poolData.objName, Vector3.zero, Quaternion.identity);
                             if (obj != null && i < poolData.objectPositions.Count && i < poolData.objectRotations.Count)
                             {
                                 obj.transform.position = poolData.objectPositions[i];
@@ -286,7 +303,7 @@ public class ObjectPooling : MonoBehaviour {
                     }
                     else
                     {
-                        Debug.LogWarning("Pool with type " + poolData.type + " doesn't exist.");
+                        Debug.LogWarning("Pool with type " + poolData.objName + " doesn't exist.");
                     }
                 }
 

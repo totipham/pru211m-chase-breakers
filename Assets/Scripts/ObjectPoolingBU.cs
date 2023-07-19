@@ -33,7 +33,7 @@ public class ObjectPoolingBU : MonoBehaviour {
     private Dictionary<string, List<string>> _typeDictionary;
     private List<GameObject> _poolList;
     private List<string> _typeList;
-    public static ObjectPooling Instance;
+    public static ObjectPoolingBU Instance;
 
     void Awake() {
         Instance = this;

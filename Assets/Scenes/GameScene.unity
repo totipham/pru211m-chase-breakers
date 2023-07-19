@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 63061686}
   - component: {fileID: 63061688}
   m_Layer: 5
-  m_Name: DisctanceScored
+  m_Name: DistanceScored
   m_TagString: DistanceScored
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1899,8 +1899,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335422451}
-  - component: {fileID: 1335422450}
   - component: {fileID: 1335422452}
+  - component: {fileID: 1335422453}
   m_Layer: 0
   m_Name: PlatformPooling
   m_TagString: Untagged
@@ -1908,59 +1908,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1335422450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335422449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6ef325553689413186461f4f0647783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools:
-  - tag: StartPlatform
-    type: Normal
-    prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
-    size: 1
-  - tag: Platform
-    type: One
-    prefab: {fileID: 2643363578255182533, guid: 9acb87984858c416797c971dac0af39e, type: 3}
-    size: 2
-  - tag: Platform
-    type: Two
-    prefab: {fileID: 2643363578255182533, guid: 1b928fb41b748412aa97b9065a03ad20, type: 3}
-    size: 2
-  - tag: Platform
-    type: Three
-    prefab: {fileID: 2643363578255182533, guid: bcddd074744b3499ba49da796d5348fe, type: 3}
-    size: 2
-  - tag: Platform
-    type: Four
-    prefab: {fileID: 2643363578255182533, guid: 18238ca862f414d4694da63a4709d3d2, type: 3}
-    size: 2
-  - tag: Platform
-    type: Five
-    prefab: {fileID: 2643363578255182533, guid: e524fe63779df4068b2d2fe72164a6ba, type: 3}
-    size: 2
-  - tag: Platform
-    type: Six
-    prefab: {fileID: 2643363578255182533, guid: a661eca0f92014ae5a410001ed031c1e, type: 3}
-    size: 2
-  - tag: Platform
-    type: Seven
-    prefab: {fileID: 2643363578255182533, guid: 36d3e33599f6a47619d6fc2722824d7e, type: 3}
-    size: 2
-  - tag: Obstacle
-    type: Police
-    prefab: {fileID: 846578708047699271, guid: 48bb55ed26a164873a363f6d0494dee8, type: 3}
-    size: 2
-  - tag: Obstacle
-    type: Box
-    prefab: {fileID: 3816396421214262071, guid: 0c8c24b716d6e4457ab5c576ffe43a5b, type: 3}
-    size: 2
 --- !u!4 &1335422451
 Transform:
   m_ObjectHideFlags: 0
@@ -1988,8 +1935,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eff536f9334cf2a3ca2ea95fccda99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnWait: 4
-  minSpawnWait: 2
+  isContinueGame: 0
+--- !u!114 &1335422453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335422449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320159dbf30f44fbabf1276405cc2c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Obstacle
+    type: Box
+    prefab: {fileID: 815676186394754179, guid: 6039bb23ec3c1c14a82abec87b653c9a, type: 3}
+    size: 2
+  - tag: Obstacle
+    type: Police
+    prefab: {fileID: 846578708047699271, guid: 48bb55ed26a164873a363f6d0494dee8, type: 3}
+    size: 2
+  - tag: StartPlatform
+    type: Normal
+    prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
+    size: 2
+  - tag: Platform
+    type: One
+    prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
+    size: 2
+  - tag: Platform
+    type: Two
+    prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
+    size: 2
 --- !u!1 &1347912113
 GameObject:
   m_ObjectHideFlags: 0

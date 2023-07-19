@@ -1,11 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ClickyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler {
+public class MenuButtonController : MonoBehaviour, IPointerUpHandler, IPointerDownHandler {
     [SerializeField] private Image _img;
     [SerializeField] private Sprite _normal, _press;
+    [SerializeField] private SaveSystem _saveSystem;
     public void StartNewGame() {
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
@@ -25,11 +27,15 @@ public class ClickyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         SceneManager.LoadScene("Scenes/Menu");
     }
     
-    public void SaveAndBackToMenu()
-    {
-        //Save game
-        ObjectPooling objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
-        objectPooling.SaveObjectPooling("data.dat");
+    public void SaveAndBackToMenu() {
+        // _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        // //Save score
+        // PlayerPrefs.SetFloat("Score", _playerController.distance);
+        //
+        // //Save object pool game
+        // ObjectPooling objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
+        // objectPooling.SaveObjectPooling("data.dat");
+        
         
         //Load scene
         BackToMenu();
@@ -39,9 +45,13 @@ public class ClickyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         Time.timeScale = 1;
         var op = SceneManager.LoadSceneAsync("Scenes/GameScene");
         op.completed += (AsyncOperation obj) => {
+            
+            
             GameObject platformPooling = GameObject.Find("PlatformPooling");
             ObjectPooling objectPooling = platformPooling.GetComponent<ObjectPooling>();
             GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
+            _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+            _playerController.distance = PlayerPrefs.GetFloat("Score");
             groundSpawner.isContinueGame = true;
             objectPooling.LoadGame("data.dat");
         };

@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+public class InGameButtonController : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField] private Image _img;
     [SerializeField] private Sprite _normal, _press;
