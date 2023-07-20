@@ -4,34 +4,18 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class InGameButtonController : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+public class InGameButtonController : MonoBehaviour
 {
     [SerializeField] private Image _img;
-    [SerializeField] private Sprite _normal, _press;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private SaveSystem _saveSystem;
-
-    private void Start() {
-        _saveSystem = new SaveSystem();
-    }
 
     public void StartNewGame()
     {
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
         Debug.Log("Load new game");
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        _img.sprite = _normal;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _img.sprite = _press;
     }
 
     public void PauseGame()
@@ -68,27 +52,9 @@ public class InGameButtonController : MonoBehaviour, IPointerUpHandler, IPointer
         // objectPooling.SaveObjectPooling("data.dat");
         
         //Save game
-        _saveSystem.SaveGame();
+        SaveSystem.Instance.SaveGame();
         
         //Load scene
         BackToMenu();
     }
-
-    public void LoadGame() {
-        Time.timeScale = 1;
-        var op = SceneManager.LoadSceneAsync("Scenes/GameScene");
-        op.completed += (AsyncOperation obj) => {
-            _saveSystem.LoadGameFromSave();
-            
-            // GameObject platformPooling = GameObject.Find("PlatformPooling");
-            // ObjectPooling objectPooling = platformPooling.GetComponent<ObjectPooling>();
-            // GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
-            // _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-            // _playerController.distance = PlayerPrefs.GetFloat("Score");
-            // groundSpawner.isContinueGame = true;
-            // objectPooling.LoadGame("data.dat");
-        };
-    }
-
-    
 }

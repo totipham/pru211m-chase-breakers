@@ -1,14 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveSystem {
+public class SaveSystem : MonoBehaviour {
     private const string PoolingSaveFileName = "data.dat";
     private GameObject _player;
     private GameObject _chasingPolice;
     private ObjectPooling _objectPooling;
+    public static SaveSystem Instance;
+    
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        }
+    }
 
-    public SaveSystem() {
+    private void Start() {
         _player = GameObject.FindWithTag("Player");
         _chasingPolice = GameObject.FindWithTag("Police");
         _objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();

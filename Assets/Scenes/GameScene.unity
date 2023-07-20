@@ -791,6 +791,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -874,6 +875,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bb4505daa0d44f4487af599a5467065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f302e9af6e9bd498883d9e3cfc15cde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &530341223
@@ -1158,8 +1171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normal: {fileID: 0}
-  _press: {fileID: 0}
   _pauseButton: {fileID: 0}
   _resumeButton: {fileID: 0}
   _pauseMenu: {fileID: 0}
@@ -3227,8 +3238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normal: {fileID: -631682906, guid: c298d354e56924afdbaab503f1684759, type: 3}
-  _press: {fileID: 2034626778, guid: 5f70582c31ed84fdd951c179cd4b9a2d, type: 3}
   _pauseButton: {fileID: 1883544123}
   _resumeButton: {fileID: 1980987553}
   _pauseMenu: {fileID: 764600336}
@@ -3383,8 +3392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normal: {fileID: 1015404491, guid: 38201536150df4b129ffb55182217c17, type: 3}
-  _press: {fileID: 2083745491, guid: aa69f6f389d4c4054aedb20fb6a9d7f9, type: 3}
   _pauseButton: {fileID: 1883544123}
   _resumeButton: {fileID: 1980987553}
   _pauseMenu: {fileID: 764600336}
@@ -3697,8 +3704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
-  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
   _pauseButton: {fileID: 0}
   _resumeButton: {fileID: 0}
   _pauseMenu: {fileID: 0}
@@ -4077,8 +4082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
-  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
   _pauseButton: {fileID: 0}
   _resumeButton: {fileID: 0}
   _pauseMenu: {fileID: 0}
