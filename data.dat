@@ -17,7 +17,7 @@
             "activeObjectCount": 1,
             "objectPositions": [
                 {
-                    "x": -19.759986877441408,
+                    "x": -13.51999282836914,
                     "y": -4.0,
                     "z": 0.0
                 }
@@ -33,16 +33,10 @@
         },
         {
             "objName": "Platform_One",
-            "activeObjectCount": 0,
-            "objectPositions": [],
-            "objectRotations": []
-        },
-        {
-            "objName": "Platform_Two",
             "activeObjectCount": 1,
             "objectPositions": [
                 {
-                    "x": 8.240012168884278,
+                    "x": 14.480006217956543,
                     "y": -4.0,
                     "z": 0.0
                 }
@@ -55,6 +49,12 @@
                     "w": 1.0
                 }
             ]
+        },
+        {
+            "objName": "Platform_Two",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
         }
     ]
 }

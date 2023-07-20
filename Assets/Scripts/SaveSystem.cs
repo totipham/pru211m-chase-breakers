@@ -30,6 +30,9 @@ public class SaveSystem : MonoBehaviour {
     }
 
     public void LoadGameFromSave() {
+        _objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
+        _player = GameObject.FindWithTag("Player");
+        
         //Load Object Pooling
         _objectPooling.LoadGame(PoolingSaveFileName);
 
