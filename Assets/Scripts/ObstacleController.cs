@@ -23,9 +23,21 @@ public class ObstacleController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            Drop();
-            var slowDown = _player.SlowDown(true, slowDownVelocity, slowDownTime);
-            StartCoroutine(slowDown);
+            Debug.Log("Hit by player");
+            
+            Vector3 hit = other.contacts[0].normal;
+            float angle = Vector3.Angle(hit, Vector3.up);
+            bool top = Mathf.Abs(180f - angle) < 1f;
+            bool side = Mathf.Abs(90f - angle) < 1f;
+            
+            if (top) {
+                Drop();
+            }
+            
+            if (side) {
+                var slowDown = _player.SlowDown(true, slowDownVelocity, slowDownTime);
+                StartCoroutine(slowDown);
+            }
         }
 
         if (other.gameObject.CompareTag("Police")) {
