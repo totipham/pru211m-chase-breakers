@@ -10,6 +10,29 @@ public class SaveSystem : MonoBehaviour {
     private ObjectPooling _objectPooling;
     public static SaveSystem Instance;
     
+    [Serializable]
+    private class CharacterData {
+        public String characterName;
+        public bool isVelocity;
+        public SerializableVector characterPosition;
+        public CharacterData(String characterName, SerializableVector characterPosition) {
+            this.characterName = characterName;
+            this.characterPosition = characterPosition;
+            this.isVelocity = false;
+        }
+        
+        public CharacterData(String characterName, SerializableVector characterPosition, bool isVelocity) {
+            this.characterName = characterName;
+            this.characterPosition = characterPosition;
+            this.isVelocity = isVelocity;
+        }
+    }
+    
+    private class CharacterDataList {
+        public List<CharacterData> characterDataList;
+    }
+
+    
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -25,8 +48,7 @@ public class SaveSystem : MonoBehaviour {
     public void SaveGame() {
         SaveScore();
         SaveObjectPooling(PoolingSaveFileName);
-        SaveChasingPolicePosition();
-        SavePlayerPosition();
+        SaveCharacter();
     }
 
     public void LoadGameFromSave() {
@@ -38,10 +60,10 @@ public class SaveSystem : MonoBehaviour {
 
         //Load score
         _player.GetComponent<PlayerController>().distance = PlayerPrefs.GetFloat("Score");
+        
+        //Load character
+        LoadCharacter();
 
-        //Load player position
-
-        //Load chasing police position
     }
 
     private void SaveScore() {
@@ -53,15 +75,51 @@ public class SaveSystem : MonoBehaviour {
         _objectPooling.SaveObjectPooling(fileName);
     }
 
-    private void SaveChasingPolicePosition() {
+    private void SaveCharacter() {
+        CharacterDataList saveData = new CharacterDataList();
+        saveData.characterDataList = new List<CharacterData>();
+        String fileSave = "character1.json";
+        
+        SerializableVector playerPosition = _player.transform.position;
+        SerializableVector chasingPolicePosition = _chasingPolice.transform.position;
+        SerializableVector playerVelocity = (Vector3) _player.GetComponent<PlayerController>().velocity;
+        
+        CharacterData playerData = new CharacterData("Player", playerPosition);
+        CharacterData playerVelocityData = new CharacterData("Player", playerVelocity, true);
+        CharacterData chasingPoliceData = new CharacterData("ChasingPolice", chasingPolicePosition);
+        
+        saveData.characterDataList.Add(playerData);
+        saveData.characterDataList.Add(chasingPoliceData);
+        saveData.characterDataList.Add(playerVelocityData);
+        
+        string json = JsonUtility.ToJson(saveData, true);
+        System.IO.File.WriteAllText(fileSave, json);
     }
 
-    private void SavePlayerPosition() {
-    }
 
-    private void LoadChasingPolicePosition() {
-    }
-
-    private void LoadPlayerPosition() {
+    private void LoadCharacter() {
+        String fileSave = "character1.json";
+        
+        _player = GameObject.FindWithTag("Player");
+        _chasingPolice = GameObject.FindWithTag("Police");
+        
+        if (!System.IO.File.Exists(fileSave)) {
+            return;
+        }
+        
+        string json = System.IO.File.ReadAllText(fileSave);
+        CharacterDataList savedData = JsonUtility.FromJson<CharacterDataList>(json);
+        
+        foreach (CharacterData data in savedData.characterDataList) {
+            if (data.characterName == "Player") {
+                if (data.isVelocity) {
+                    _player.GetComponent<PlayerController>().velocity = (Vector3) data.characterPosition;
+                } else {
+                    _player.transform.position = data.characterPosition;
+                }
+            } else if (data.characterName == "ChasingPolice") {
+                _chasingPolice.transform.position = data.characterPosition;
+            }
+        }
     }
 }

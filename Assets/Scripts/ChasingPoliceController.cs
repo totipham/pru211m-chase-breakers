@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ChasingPoliceController : MonoBehaviour {
     private Rigidbody2D _rigid;
-    private Camera _camera;
 
     public float jumpVelocity;
     public bool isGrounded;
@@ -20,7 +19,6 @@ public class ChasingPoliceController : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _rigid = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _camera = Camera.main;
     }
 
     // Update is called once per frame
@@ -55,14 +53,14 @@ public class ChasingPoliceController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        Vector2 pos = transform.position;
         if (_player.isSlowDown) {
+            Vector2 pos = transform.position;
             if (pos.x < _player.transform.position.x - 0.25f) {
                 pos.x += 1.5f * Time.fixedDeltaTime;
             }
+            transform.position = pos;
         }
 
-        transform.position = pos;
     }
 
     void Jump() {

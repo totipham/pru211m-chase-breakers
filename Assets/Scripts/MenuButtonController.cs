@@ -10,8 +10,8 @@ public class MenuButtonController : MonoBehaviour {
         PlayerPrefs.DeleteAll();
         
         //Load scene
-        SceneManager.LoadScene("Scenes/GameScene");
         Time.timeScale = 1;
+        SceneManager.LoadScene("Scenes/GameScene");
     }
 
     public void ResumeGame() {
@@ -24,6 +24,7 @@ public class MenuButtonController : MonoBehaviour {
                 GameObject platformPooling = GameObject.Find("PlatformPooling");
                 GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
                 groundSpawner.isContinueGame = true;
+                SaveSystem.Instance = GameObject.FindWithTag("MainCamera").GetComponent<SaveSystem>();
                 SaveSystem.Instance.LoadGameFromSave();
             }
             
