@@ -38,14 +38,6 @@ public class InGameButtonController : MonoBehaviour
     }
     
     public void SaveAndBackToMenu() {
-        // _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        // //Save score
-        // PlayerPrefs.SetFloat("Score", _playerController.distance);
-        //
-        // //Save object pool game
-        // ObjectPooling objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
-        // objectPooling.SaveObjectPooling("data.dat");
-        
         //Save game
         SaveSystem.Instance.SaveGame();
         

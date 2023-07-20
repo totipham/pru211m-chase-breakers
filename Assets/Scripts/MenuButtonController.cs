@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,11 +26,6 @@ public class MenuButtonController : MonoBehaviour {
                 SaveSystem.Instance = GameObject.FindWithTag("MainCamera").GetComponent<SaveSystem>();
                 SaveSystem.Instance.LoadGameFromSave();
             }
-            
-            // GameObject platformPooling = GameObject.Find("PlatformPooling");
-            // GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
-            // groundSpawner.isContinueGame = true;
-            // SaveSystem.Instance.LoadGameFromSave();
         };
     }
 }
