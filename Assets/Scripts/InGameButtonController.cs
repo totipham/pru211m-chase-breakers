@@ -1,12 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class InGameButtonController : MonoBehaviour
 {
-    [SerializeField] private Image _img;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _pauseMenu;
