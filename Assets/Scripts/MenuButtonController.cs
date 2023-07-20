@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -30,10 +28,22 @@ public class ClickyButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public void SaveAndBackToMenu()
     {
         //Save game
-        
+        ObjectPooling objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
+        objectPooling.SaveObjectPooling("data.dat");
         
         //Load scene
+        BackToMenu();
+    }
+
+    public void LoadGame() {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Scenes/Menu");
+        var op = SceneManager.LoadSceneAsync("Scenes/GameScene");
+        op.completed += (AsyncOperation obj) => {
+            GameObject platformPooling = GameObject.Find("PlatformPooling");
+            ObjectPooling objectPooling = platformPooling.GetComponent<ObjectPooling>();
+            GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
+            groundSpawner.isContinueGame = true;
+            objectPooling.LoadGame("data.dat");
+        };
     }
 }

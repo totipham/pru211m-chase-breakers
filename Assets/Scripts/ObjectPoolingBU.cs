@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class ObjectPooling : MonoBehaviour {
+public class ObjectPoolingBU : MonoBehaviour {
     [Serializable]
     public class Pool {
         public string tag;
@@ -21,7 +21,7 @@ public class ObjectPooling : MonoBehaviour {
 
     [Serializable]
     public class PoolData {
-        public string type;
+        public string tag;
         public int activeObjectCount;
         public List<SerializableVector> objectPositions;
         public List<Quaternion> objectRotations;
@@ -31,12 +31,14 @@ public class ObjectPooling : MonoBehaviour {
 
     private Dictionary<string, List<GameObject>> _poolDictionary;
     private Dictionary<string, List<string>> _typeDictionary;
+    private List<GameObject> _poolList;
     private List<string> _typeList;
     public static ObjectPooling Instance;
 
     void Awake() {
         Instance = this;
         _poolDictionary = new Dictionary<string, List<GameObject>>();
+        _poolList = new List<GameObject>();
         _typeList = new List<string>();
         GenerateObjectInPool();
     }
@@ -47,100 +49,100 @@ public class ObjectPooling : MonoBehaviour {
 
     private void GenerateObjectInPool() {
         foreach (Pool pool in pools) {
-            List<GameObject> _poolList = new List<GameObject>();
-            String objName = $"{pool.tag}_{pool.type}";
+            // List<GameObject> poolList = new List<GameObject>();
 
             for (int i = 0; i < pool.size; i++) {
-                GameObject obj = Instantiate(pool.prefab);
+                var prefab = pool.prefab;
+                
+                GameObject obj = Instantiate(prefab);
                 obj.transform.parent = transform;
-                obj.transform.name = objName;
+                obj.transform.name = $"{pool.tag}_{pool.type}";
                 obj.SetActive(false);
 
-                if (_poolDictionary.ContainsKey(objName)) {
-                    _poolDictionary[objName].Add(obj);
+                if (_poolDictionary.ContainsKey(tag)) {
+                    _poolDictionary[pool.tag].Add(obj);
                 } else {
                     _poolList.Add(obj);
                 }
             }
 
-            if (!_poolDictionary.ContainsKey(objName)) {
-                _poolDictionary.Add(objName, _poolList);
+            if (!_poolDictionary.ContainsKey(pool.tag)) {
+                _poolDictionary.Add(pool.tag, _poolList);
             }
         }
     }
 
-    public GameObject SpawnFromPool(string objName, Vector3 position, Quaternion rotation) {
-        if (!_poolDictionary.ContainsKey(objName)) {
-            Debug.LogWarning("Pool with name " + objName + " doesn't exist.");
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) {
+        if (!_poolDictionary.ContainsKey(tag)) {
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
             return null;
         }
-    
-        for (int i = 0; i < _poolDictionary[objName].Count; i++) {
-            if (!_poolDictionary[objName][i].activeInHierarchy) {
-                GameObject objectToSpawn = _poolDictionary[objName][i];
-    
+
+        for (int i = 0; i < _poolDictionary[tag].Count; i++) {
+            if (!_poolDictionary[tag][i].activeInHierarchy) {
+                GameObject objectToSpawn = _poolDictionary[tag][i];
+
                 objectToSpawn.SetActive(true);
                 objectToSpawn.transform.position = position;
                 objectToSpawn.transform.rotation = rotation;
-    
+
                 return objectToSpawn;
             }
         }
-    
+
         return null;
     }
 
-    // public GameObject SpawnFromPoolByIndex(string tag, Vector3 position, Quaternion rotation, int index) {
-    //     var getIndex = index;
-    //     Debug.Log("Pooling inside: " + _poolDictionary);
-    //     bool isExist = _poolDictionary.ContainsKey(tag);
-    //     if (!isExist) {
-    //         Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
-    //         return null;
-    //     }
-    //
-    //     if (index >= _poolDictionary[tag].Count) {
-    //         Debug.LogWarning("Index " + index + " is out of range.");
-    //         return null;
-    //     }
-    //
-    //     //Check if active is true
-    //     if (_poolDictionary[tag][index].activeInHierarchy) {
-    //         Debug.LogWarning("Object at index " + index + " is already active.");
-    //
-    //         getIndex = _poolDictionary[tag].Count + index;
-    //         if (getIndex >= _poolDictionary[tag].Count) {
-    //             //Duplicate pool
-    //             GenerateObjectInPool();
-    //         }
-    //     }
-    //
-    //     GameObject objectToSpawn = _poolDictionary[tag][getIndex];
-    //
-    //     objectToSpawn.SetActive(true);
-    //     objectToSpawn.transform.position = position;
-    //     objectToSpawn.transform.rotation = rotation;
-    //
-    //     return objectToSpawn;
-    // }
-
-    public GameObject SpawnFromPoolByType(string tag, Vector3 position, Quaternion rotation, string type) {
-        String objName = $"{tag}_{type}";
-        if (!_poolDictionary.ContainsKey(objName)) {
-            Debug.LogWarning("Pool with tag " + objName + " doesn't exist.");
+    public GameObject SpawnFromPoolByIndex(string tag, Vector3 position, Quaternion rotation, int index) {
+        var getIndex = index;
+        Debug.Log("Pooling inside: " + _poolDictionary);
+        bool isExist = _poolDictionary.ContainsKey(tag);
+        if (!isExist) {
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
             return null;
         }
 
-        for (int i = 0; i < _poolDictionary[objName].Count; i++) {
-            if (!_poolDictionary[objName][i].activeInHierarchy) {
+        if (index >= _poolDictionary[tag].Count) {
+            Debug.LogWarning("Index " + index + " is out of range.");
+            return null;
+        }
+
+        //Check if active is true
+        if (_poolDictionary[tag][index].activeInHierarchy) {
+            Debug.LogWarning("Object at index " + index + " is already active.");
+
+            getIndex = _poolDictionary[tag].Count + index;
+            if (getIndex >= _poolDictionary[tag].Count) {
+                //Duplicate pool
+                GenerateObjectInPool();
+            }
+        }
+
+        GameObject objectToSpawn = _poolDictionary[tag][getIndex];
+
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+        objectToSpawn.transform.rotation = rotation;
+
+        return objectToSpawn;
+    }
+
+    public GameObject SpawnFromPoolByType(string tag, Vector3 position, Quaternion rotation, string type) {
+        if (!_poolDictionary.ContainsKey(tag)) {
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+            return null;
+        }
+
+        for (int i = 0; i < _poolDictionary[tag].Count; i++) {
+            if (!_poolDictionary[tag][i].activeInHierarchy && _poolDictionary[tag][i].name.Equals($"{tag}_{type}")) {
                 
                 //Check if _poolDictionary[tag][i] is not null
-                if (_poolDictionary[objName][i] == null) {
+                if (_poolDictionary[tag][i] == null) {
                     Debug.LogWarning("Object at index " + i + " is null.");
                     return null;
                 }
                 
-                GameObject objectToSpawn = _poolDictionary[objName][i];
+                GameObject objectToSpawn = _poolDictionary[tag][i];
 
                 objectToSpawn.SetActive(true);
                 objectToSpawn.transform.position = position;
@@ -158,7 +160,7 @@ public class ObjectPooling : MonoBehaviour {
 
         foreach (Pool pool in pools) {
             if (pool.tag.Equals(tag)) {
-                typeList.Add($"{pool.tag}_{pool.type}");
+                typeList.Add(pool.type);
             }
         }
 
@@ -215,7 +217,7 @@ public class ObjectPooling : MonoBehaviour {
         foreach (Pool pool in pools)
         {
             PoolData poolData = new PoolData();
-            poolData.type = pool.type;
+            poolData.tag = pool.tag;
             poolData.activeObjectCount = GetActiveObjectCount(pool.tag);
             poolData.objectPositions = new List<SerializableVector>();
             poolData.objectRotations = new List<Quaternion>();
@@ -267,16 +269,17 @@ public class ObjectPooling : MonoBehaviour {
             {
                 foreach (PoolData poolData in objectPoolingData.poolDataList)
                 {
-                    if (_poolDictionary.ContainsKey(poolData.type))
+                    if (_poolDictionary.ContainsKey(poolData.tag))
                     {
-                        foreach (GameObject obj in _poolDictionary[poolData.type])
+                        foreach (GameObject obj in _poolDictionary[poolData.tag])
                         {
                             obj.SetActive(false);
                         }
-
+                        
+                        //Loop through list
                         for (int i = 0; i < poolData.activeObjectCount; i++)
                         {
-                            GameObject obj = SpawnFromPool(poolData.type, Vector3.zero, Quaternion.identity);
+                            GameObject obj = SpawnFromPool(poolData.tag, Vector3.zero, Quaternion.identity);
                             if (obj != null && i < poolData.objectPositions.Count && i < poolData.objectRotations.Count)
                             {
                                 obj.transform.position = poolData.objectPositions[i];
@@ -286,7 +289,7 @@ public class ObjectPooling : MonoBehaviour {
                     }
                     else
                     {
-                        Debug.LogWarning("Pool with type " + poolData.type + " doesn't exist.");
+                        Debug.LogWarning("Pool with tag " + poolData.tag + " doesn't exist.");
                     }
                 }
 
