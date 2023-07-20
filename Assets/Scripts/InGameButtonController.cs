@@ -12,12 +12,11 @@ public class InGameButtonController : MonoBehaviour
     {
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
-        Debug.Log("Load new game");
+        Time.timeScale = 1;
     }
 
     public void PauseGame()
     {
-        Debug.Log("Pause game");
         Time.timeScale = 0;
         _resumeButton.SetActive(true);
         _pauseButton.SetActive(false);
@@ -26,7 +25,6 @@ public class InGameButtonController : MonoBehaviour
 
     public void ResumeGame()
     {
-        Debug.Log("Resume game");
         Time.timeScale = 1;
         _resumeButton.SetActive(false);
         _pauseButton.SetActive(true);

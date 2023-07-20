@@ -2,9 +2,22 @@
     "poolDataList": [
         {
             "objName": "Obstacle_Box",
-            "activeObjectCount": 0,
-            "objectPositions": [],
-            "objectRotations": []
+            "activeObjectCount": 1,
+            "objectPositions": [
+                {
+                    "x": 24.510028839111329,
+                    "y": 0.5148992538452148,
+                    "z": 0.0
+                }
+            ],
+            "objectRotations": [
+                {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.000006209754701558268,
+                    "w": 1.0
+                }
+            ]
         },
         {
             "objName": "Obstacle_Police",
@@ -23,7 +36,7 @@
             "activeObjectCount": 1,
             "objectPositions": [
                 {
-                    "x": -19.119922637939454,
+                    "x": 15.600028038024903,
                     "y": -4.0,
                     "z": 0.0
                 }
@@ -39,10 +52,16 @@
         },
         {
             "objName": "Platform_Two",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_Three",
             "activeObjectCount": 1,
             "objectPositions": [
                 {
-                    "x": 9.040080070495606,
+                    "x": -12.55997371673584,
                     "y": -4.0,
                     "z": 0.0
                 }
@@ -55,6 +74,30 @@
                     "w": 1.0
                 }
             ]
+        },
+        {
+            "objName": "Platform_Four",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_Five",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_Six",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_Seven",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
         }
     ]
 }

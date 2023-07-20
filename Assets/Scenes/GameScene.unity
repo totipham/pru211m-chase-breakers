@@ -2161,7 +2161,7 @@ MonoBehaviour:
   pools:
   - tag: Obstacle
     type: Box
-    prefab: {fileID: 815676186394754179, guid: 6039bb23ec3c1c14a82abec87b653c9a, type: 3}
+    prefab: {fileID: 3816396421214262071, guid: b748821401c4243138978bed3b181731, type: 3}
     size: 2
   - tag: Obstacle
     type: Police
@@ -2173,11 +2173,31 @@ MonoBehaviour:
     size: 2
   - tag: Platform
     type: One
-    prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
+    prefab: {fileID: 2643363578255182533, guid: 9acb87984858c416797c971dac0af39e, type: 3}
     size: 2
   - tag: Platform
     type: Two
-    prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
+    prefab: {fileID: 2643363578255182533, guid: 1b928fb41b748412aa97b9065a03ad20, type: 3}
+    size: 2
+  - tag: Platform
+    type: Three
+    prefab: {fileID: 2643363578255182533, guid: bcddd074744b3499ba49da796d5348fe, type: 3}
+    size: 2
+  - tag: Platform
+    type: Four
+    prefab: {fileID: 2643363578255182533, guid: 18238ca862f414d4694da63a4709d3d2, type: 3}
+    size: 2
+  - tag: Platform
+    type: Five
+    prefab: {fileID: 2643363578255182533, guid: e524fe63779df4068b2d2fe72164a6ba, type: 3}
+    size: 2
+  - tag: Platform
+    type: Six
+    prefab: {fileID: 2643363578255182533, guid: a661eca0f92014ae5a410001ed031c1e, type: 3}
+    size: 2
+  - tag: Platform
+    type: Seven
+    prefab: {fileID: 2643363578255182533, guid: 36d3e33599f6a47619d6fc2722824d7e, type: 3}
     size: 2
 --- !u!1 &1347912113
 GameObject:
@@ -2604,7 +2624,7 @@ RectTransform:
   - {fileID: 2099295978}
   - {fileID: 63061685}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2832,7 +2852,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1779927006
 Animator:
@@ -3285,9 +3305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa1b86657e6f4814817f296b4c3b2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _img: {fileID: 1830844790}
-  _normal: {fileID: -582138448, guid: c298d354e56924afdbaab503f1684759, type: 3}
-  _press: {fileID: -1493322623, guid: 5f70582c31ed84fdd951c179cd4b9a2d, type: 3}
 --- !u!1 &1883544123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3752,7 +3769,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2009555416
 GameObject:
