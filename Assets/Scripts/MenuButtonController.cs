@@ -36,7 +36,6 @@ public class MenuButtonController : MonoBehaviour, IPointerUpHandler, IPointerDo
         // ObjectPooling objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
         // objectPooling.SaveObjectPooling("data.dat");
         
-        
         //Save game
         _saveSystem.SaveGame();
         
