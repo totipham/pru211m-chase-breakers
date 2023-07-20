@@ -1,12 +1,9 @@
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
-public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+public class InGameButtonController : MonoBehaviour
 {
-    [SerializeField] private Image _img;
-    [SerializeField] private Sprite _normal, _press;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _pauseMenu;
@@ -16,16 +13,6 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
         Debug.Log("Load new game");
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        _img.sprite = _normal;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _img.sprite = _press;
     }
 
     public void PauseGame()
@@ -46,4 +33,25 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
         _pauseMenu.SetActive(false);
     }
     
+    public void BackToMenu()
+    {
+        //Load scene
+        SceneManager.LoadScene("Scenes/Menu");
+    }
+    
+    public void SaveAndBackToMenu() {
+        // _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        // //Save score
+        // PlayerPrefs.SetFloat("Score", _playerController.distance);
+        //
+        // //Save object pool game
+        // ObjectPooling objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
+        // objectPooling.SaveObjectPooling("data.dat");
+        
+        //Save game
+        SaveSystem.Instance.SaveGame();
+        
+        //Load scene
+        BackToMenu();
+    }
 }

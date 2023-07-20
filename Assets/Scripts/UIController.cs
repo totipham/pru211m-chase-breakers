@@ -12,12 +12,6 @@ public class UIController : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -29,15 +23,5 @@ public class UIController : MonoBehaviour
 
         int distance = Mathf.FloorToInt(player.distance);
         distanceScored.text = distance + " m";
-    }
-
-    private void OnEnable()
-    {
-        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-        UnityEngine.UIElements.Button button = root.Q<UnityEngine.UIElements.Button>("ButtonStart");
-        button.clicked += () =>
-        {
-            Debug.Log("Button clicked");
-        };
     }
 }

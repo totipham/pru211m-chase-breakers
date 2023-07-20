@@ -1,0 +1,60 @@
+{
+    "poolDataList": [
+        {
+            "objName": "Obstacle_Box",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Obstacle_Police",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "StartPlatform_Normal",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_One",
+            "activeObjectCount": 1,
+            "objectPositions": [
+                {
+                    "x": -19.119922637939454,
+                    "y": -4.0,
+                    "z": 0.0
+                }
+            ],
+            "objectRotations": [
+                {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            ]
+        },
+        {
+            "objName": "Platform_Two",
+            "activeObjectCount": 1,
+            "objectPositions": [
+                {
+                    "x": 9.040080070495606,
+                    "y": -4.0,
+                    "z": 0.0
+                }
+            ],
+            "objectRotations": [
+                {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            ]
+        }
+    ]
+}

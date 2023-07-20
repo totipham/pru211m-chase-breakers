@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
             // }
         }
     }
-
+    
     bool IsVisibleFromCamera()
     {
         Vector3 viewportPosition =
