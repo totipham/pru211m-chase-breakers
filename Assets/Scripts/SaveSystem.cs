@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour {
     private const string PoolingSaveFileName = "data.dat";
+    private const string CharacterPositionSaveFileName = "character.dat";
     private GameObject _player;
     private GameObject _chasingPolice;
     private ObjectPooling _objectPooling;
@@ -18,7 +19,7 @@ public class SaveSystem : MonoBehaviour {
         public CharacterData(String characterName, SerializableVector characterPosition) {
             this.characterName = characterName;
             this.characterPosition = characterPosition;
-            this.isVelocity = false;
+            isVelocity = false;
         }
         
         public CharacterData(String characterName, SerializableVector characterPosition, bool isVelocity) {
@@ -48,7 +49,7 @@ public class SaveSystem : MonoBehaviour {
     public void SaveGame() {
         SaveScore();
         SaveObjectPooling(PoolingSaveFileName);
-        SaveCharacter();
+        SaveCharacter(CharacterPositionSaveFileName);
     }
 
     public void LoadGameFromSave() {
@@ -62,7 +63,7 @@ public class SaveSystem : MonoBehaviour {
         _player.GetComponent<PlayerController>().distance = PlayerPrefs.GetFloat("Score");
         
         //Load character
-        LoadCharacter();
+        LoadCharacter(CharacterPositionSaveFileName);
 
     }
 
@@ -75,10 +76,9 @@ public class SaveSystem : MonoBehaviour {
         _objectPooling.SaveObjectPooling(fileName);
     }
 
-    private void SaveCharacter() {
+    private void SaveCharacter(String fileSave) {
         CharacterDataList saveData = new CharacterDataList();
         saveData.characterDataList = new List<CharacterData>();
-        String fileSave = "character1.json";
         
         SerializableVector playerPosition = _player.transform.position;
         SerializableVector chasingPolicePosition = _chasingPolice.transform.position;
@@ -97,9 +97,7 @@ public class SaveSystem : MonoBehaviour {
     }
 
 
-    private void LoadCharacter() {
-        String fileSave = "character1.json";
-        
+    private void LoadCharacter(String fileSave) {
         _player = GameObject.FindWithTag("Player");
         _chasingPolice = GameObject.FindWithTag("Police");
         
