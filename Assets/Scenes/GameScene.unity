@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 582699320}
   - component: {fileID: 582699319}
   - component: {fileID: 582699318}
-  - component: {fileID: 582699317}
+  - component: {fileID: 582699321}
   m_Layer: 5
   m_Name: BackHome
   m_TagString: Untagged
@@ -1052,21 +1052,6 @@ RectTransform:
   m_AnchoredPosition: {x: 98.75, y: 83}
   m_SizeDelta: {x: 350, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &582699317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582699315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa1b86657e6f4814817f296b4c3b2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _img: {fileID: 582699319}
-  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
-  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
 --- !u!114 &582699318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,8 +1096,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 582699317}
-        m_TargetAssemblyTypeName: ClickyButton, Assembly-CSharp
+      - m_Target: {fileID: 582699321}
+        m_TargetAssemblyTypeName: InGameButtonController, Assembly-CSharp
         m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
@@ -1161,6 +1146,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582699315}
   m_CullTransparentMesh: 1
+--- !u!114 &582699321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582699315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normal: {fileID: 0}
+  _press: {fileID: 0}
+  _pauseButton: {fileID: 0}
+  _resumeButton: {fileID: 0}
+  _pauseMenu: {fileID: 0}
 --- !u!1 &689576187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,7 +3562,7 @@ GameObject:
   - component: {fileID: 2009555421}
   - component: {fileID: 2009555420}
   - component: {fileID: 2009555419}
-  - component: {fileID: 2009555418}
+  - component: {fileID: 2009555422}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -3589,21 +3591,6 @@ RectTransform:
   m_AnchoredPosition: {x: 97.3, y: 439.7}
   m_SizeDelta: {x: 350, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2009555418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009555416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa1b86657e6f4814817f296b4c3b2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _img: {fileID: 2009555420}
-  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
-  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
 --- !u!114 &2009555419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3648,8 +3635,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009555418}
-        m_TargetAssemblyTypeName: ClickyButton, Assembly-CSharp
+      - m_Target: {fileID: 2009555422}
+        m_TargetAssemblyTypeName: InGameButtonController, Assembly-CSharp
         m_MethodName: StartNewGame
         m_Mode: 1
         m_Arguments:
@@ -3698,6 +3685,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009555416}
   m_CullTransparentMesh: 1
+--- !u!114 &2009555422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009555416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
+  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
+  _pauseButton: {fileID: 0}
+  _resumeButton: {fileID: 0}
+  _pauseMenu: {fileID: 0}
 --- !u!1 &2014399587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3938,7 +3942,7 @@ GameObject:
   - component: {fileID: 2102225490}
   - component: {fileID: 2102225489}
   - component: {fileID: 2102225488}
-  - component: {fileID: 2102225487}
+  - component: {fileID: 2102225491}
   m_Layer: 5
   m_Name: SaveQuit
   m_TagString: Untagged
@@ -3967,21 +3971,6 @@ RectTransform:
   m_AnchoredPosition: {x: 97.3, y: 260.4}
   m_SizeDelta: {x: 350, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2102225487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102225485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa1b86657e6f4814817f296b4c3b2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _img: {fileID: 2102225489}
-  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
-  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
 --- !u!114 &2102225488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4026,8 +4015,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2102225487}
-        m_TargetAssemblyTypeName: ClickyButton, Assembly-CSharp
+      - m_Target: {fileID: 2102225491}
+        m_TargetAssemblyTypeName: InGameButtonController, Assembly-CSharp
         m_MethodName: SaveAndBackToMenu
         m_Mode: 1
         m_Arguments:
@@ -4076,6 +4065,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102225485}
   m_CullTransparentMesh: 1
+--- !u!114 &2102225491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102225485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdff4b2c47da40989610d96c5ebe629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normal: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
+  _press: {fileID: 21300000, guid: 998294cc1d3154630847299c6e110ef8, type: 3}
+  _pauseButton: {fileID: 0}
+  _resumeButton: {fileID: 0}
+  _pauseMenu: {fileID: 0}
 --- !u!1001 &4165011440374721689
 PrefabInstance:
   m_ObjectHideFlags: 0
