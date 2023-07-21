@@ -1,12 +1,9 @@
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
-public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+public class InGameButtonController : MonoBehaviour
 {
-    [SerializeField] private Image _img;
-    [SerializeField] private Sprite _normal, _press;
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _resumeButton;
     [SerializeField] private GameObject _pauseMenu;
@@ -15,22 +12,11 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
     {
         //Load scene
         SceneManager.LoadScene("Scenes/GameScene");
-        Debug.Log("Load new game");
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        _img.sprite = _normal;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        _img.sprite = _press;
+        Time.timeScale = 1;
     }
 
     public void PauseGame()
     {
-        Debug.Log("Pause game");
         Time.timeScale = 0;
         _resumeButton.SetActive(true);
         _pauseButton.SetActive(false);
@@ -39,11 +25,23 @@ public class ClickableFunction : MonoBehaviour, IPointerUpHandler, IPointerDownH
 
     public void ResumeGame()
     {
-        Debug.Log("Resume game");
         Time.timeScale = 1;
         _resumeButton.SetActive(false);
         _pauseButton.SetActive(true);
         _pauseMenu.SetActive(false);
     }
     
+    public void BackToMenu()
+    {
+        //Load scene
+        SceneManager.LoadScene("Scenes/Menu");
+    }
+    
+    public void SaveAndBackToMenu() {
+        //Save game
+        SaveSystem.Instance.SaveGame();
+        
+        //Load scene
+        BackToMenu();
+    }
 }

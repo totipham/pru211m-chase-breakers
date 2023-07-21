@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Joystick joystick;
+    // public Joystick joystick;
     private Rigidbody2D _rigid;
     private Camera _camera;
+    private SwipeControl _swipeLogic;
 
     public Vector2 velocity;
     public float jumpVelocity;
@@ -38,9 +39,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        joystick = GetComponent<Joystick>();
+        // joystick = GetComponent<Joystick>();
         _rigid = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _swipeLogic = GetComponent<SwipeControl>();
         _camera = Camera.main;
         // isGrounded = true;
         isFall = false;
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        SwipeControl.SwipeDirection direction = _swipeLogic.getSwipeDirection();
         if (isDead || isStopping)
         {
             return;
@@ -67,7 +70,7 @@ public class PlayerController : MonoBehaviour
             isClimbing = false;
 
             //Control: Up
-            if (Input.GetKeyDown(KeyCode.UpArrow) || joystick.GetAxisX() > 0)
+            if (Input.GetKeyDown(KeyCode.UpArrow) || direction == SwipeControl.SwipeDirection.Jump)
             {
                 isGrounded = false;
                 jumpSound.Play();
@@ -75,7 +78,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Control: Down
-            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0)
+            if (Input.GetKeyDown(KeyCode.DownArrow) || direction == SwipeControl.SwipeDirection.Slide)
             {
                 //TODO: Bow Down Animation
             }
@@ -83,7 +86,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             //Control: Down
-            if (Input.GetKeyDown(KeyCode.DownArrow) || joystick.GetAxisX() < 0)
+            if (Input.GetKeyDown(KeyCode.DownArrow) || direction == SwipeControl.SwipeDirection.Slide)
             {
                 isFall = true;
             }
@@ -262,7 +265,7 @@ public class PlayerController : MonoBehaviour
             // }
         }
     }
-
+    
     bool IsVisibleFromCamera()
     {
         Vector3 viewportPosition =
