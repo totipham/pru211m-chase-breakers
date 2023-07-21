@@ -69,14 +69,21 @@ public class GroundSpawner : MonoBehaviour
                 return;
             }
 
-            int randomPos = Random.Range(1, childCount);
+            //Generate obstacle at random position between Start and End point
+            // int randomPos = Random.Range(1, childCount);
+            Transform startTransform = _currentPlatform.transform.GetChild(1).transform;
+            Transform endTransform = _currentPlatform.transform.GetChild(2).transform;
+            
+            Vector2 randomPosVector = new Vector2(Random.Range(startTransform.position.x, endTransform.position.x),
+                Random.Range(startTransform.position.y, endTransform.position.y));
+            
+            float posX = randomPosVector.x;
+            float posY = randomPosVector.y;
 
-            Transform areaTransform = _currentPlatform.transform.GetChild(randomPos).transform;
-            Vector2 areaPos = areaTransform.position;
-            float posX = areaPos.x;
-            float posY = areaPos.y;
-            float startPoint = posX;
-            float endPoint = posX + areaTransform.localScale.x;
+            // float posX = areaPos.x;
+            // float posY = areaPos.y;
+            // float startPoint = posX;
+            // float endPoint = posX + areaTransform.localScale.x;
             
 
             Vector2 spawnPos = new Vector2(posX, posY + 1f);
