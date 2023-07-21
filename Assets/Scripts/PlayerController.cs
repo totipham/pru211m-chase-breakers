@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource gameOverSound;
+    [SerializeField] private AudioSource caughtSound;
 
     void Start()
     {
@@ -159,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Player: dicstance
-        distance += (velocity.x + Time.fixedDeltaTime) / 50;
+        distance += (velocity.x + Time.fixedDeltaTime) / 40;
     }
 
     void GameOver()
@@ -167,6 +168,10 @@ public class PlayerController : MonoBehaviour
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
         gameOverSound.Play();
+
+        ArmedPoliceController _armedPolice = GameObject.FindGameObjectWithTag("ObstaclePolice").GetComponent<ArmedPoliceController>();
+
+
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)

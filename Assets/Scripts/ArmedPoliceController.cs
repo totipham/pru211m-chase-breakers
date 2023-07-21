@@ -29,6 +29,7 @@ public class ArmedPoliceController : MonoBehaviour
         {
             fireElapsedTime = 0;
             Fire();
+            shootSound.Play();
         }
     }
 
@@ -41,7 +42,6 @@ public class ArmedPoliceController : MonoBehaviour
         bullet.transform.parent = transform.parent;
         //Add velocity to bullet
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-2, 0);
-        shootSound.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
