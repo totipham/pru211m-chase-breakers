@@ -2179,6 +2179,10 @@ MonoBehaviour:
     type: Police
     prefab: {fileID: 846578708047699271, guid: 48bb55ed26a164873a363f6d0494dee8, type: 3}
     size: 2
+  - tag: Obstacle
+    type: Chimney
+    prefab: {fileID: 3816396421214262071, guid: bc06284f911414e0ebc5cd2bebf5c3e9, type: 3}
+    size: 2
   - tag: StartPlatform
     type: Normal
     prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
