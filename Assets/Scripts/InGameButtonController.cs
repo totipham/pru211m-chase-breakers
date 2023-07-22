@@ -10,8 +10,7 @@ public class InGameButtonController : MonoBehaviour
 
     public void StartNewGame()
     {
-        //Load scene
-        SceneManager.LoadScene("Scenes/GameScene");
+        SceneManager.LoadScene(1);
         Time.timeScale = 1;
     }
 
@@ -35,7 +34,7 @@ public class InGameButtonController : MonoBehaviour
     public void BackToMenu()
     {
         //Load scene
-        SceneManager.LoadScene("Scenes/Menu");
+        SceneManager.LoadScene(0);
     }
     
     public void SaveAndBackToMenu() {

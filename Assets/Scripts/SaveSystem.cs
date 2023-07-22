@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour {
-    private const string PoolingSaveFileName = "data.dat";
-    private const string CharacterPositionSaveFileName = "character.dat";
     private GameObject _player;
     private GameObject _chasingPolice;
     private ObjectPooling _objectPooling;
     public static SaveSystem Instance;
+    private String saveCharacterPath;
+    private String savePoolingPath;
     
     [Serializable]
     private class CharacterData {
@@ -47,23 +48,27 @@ public class SaveSystem : MonoBehaviour {
     }
 
     public void SaveGame() {
+        saveCharacterPath = Path.Combine(Application.persistentDataPath, "dataCharacter.dat");
+        savePoolingPath = Path.Combine(Application.persistentDataPath, "dataPooling.dat");
         SaveScore();
-        SaveObjectPooling(PoolingSaveFileName);
-        SaveCharacter(CharacterPositionSaveFileName);
+        SaveObjectPooling(savePoolingPath);
+        SaveCharacter(saveCharacterPath);
     }
 
     public void LoadGameFromSave() {
+        saveCharacterPath = Path.Combine(Application.persistentDataPath, "dataCharacter.dat");
+        savePoolingPath = Path.Combine(Application.persistentDataPath, "dataPooling.dat");
         _objectPooling = GameObject.Find("PlatformPooling").GetComponent<ObjectPooling>();
         _player = GameObject.FindWithTag("Player");
         
         //Load Object Pooling
-        _objectPooling.LoadGame(PoolingSaveFileName);
+        _objectPooling.LoadGame(savePoolingPath);
 
         //Load score
         _player.GetComponent<PlayerController>().distance = PlayerPrefs.GetFloat("Score");
         
         //Load character
-        LoadCharacter(CharacterPositionSaveFileName);
+        LoadCharacter(saveCharacterPath);
 
     }
 
