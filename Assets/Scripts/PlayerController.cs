@@ -138,8 +138,9 @@ public class PlayerController : MonoBehaviour
 
             if (_backHit.collider)
             {
-                if (_backHit.collider.CompareTag("Ground"))
-                {
+                if (_backHit.collider.CompareTag("Ground")) {
+                    //Remove constraint X
+                    _rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                     StopRunning();
                 }
             }
