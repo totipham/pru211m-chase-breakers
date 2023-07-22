@@ -31,7 +31,8 @@ public class ObstacleController : MonoBehaviour {
             bool side = Mathf.Abs(90f - angle) < 1f;
             
             if (top) {
-                Drop();
+                _player.isGrounded = true;
+                // Drop();
             }
             
             if (side) {
