@@ -3,6 +3,6 @@ using UnityEngine;
 namespace Object {
     public abstract class ItemFactory : MonoBehaviour {
         
-        public abstract Item CreateItem();
+        public abstract Item GetItem(string item);
     }
 }
