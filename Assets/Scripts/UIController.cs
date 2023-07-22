@@ -4,12 +4,6 @@ using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
-    private enum Level {
-        Easy = 1,
-        Medium = 2,
-        Hard = 3
-    }
-    
     PlayerController player;
     public TextMeshProUGUI distanceScored;
 

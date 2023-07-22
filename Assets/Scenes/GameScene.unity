@@ -2183,6 +2183,10 @@ MonoBehaviour:
     type: Chimney
     prefab: {fileID: 3816396421214262071, guid: bc06284f911414e0ebc5cd2bebf5c3e9, type: 3}
     size: 2
+  - tag: Obstacle
+    type: Antena
+    prefab: {fileID: 3816396421214262071, guid: 16d7edeba594744f1bbe248b4842aec5, type: 3}
+    size: 2
   - tag: StartPlatform
     type: Normal
     prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
