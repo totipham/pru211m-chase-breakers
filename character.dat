@@ -1,0 +1,31 @@
+{
+    "characterDataList": [
+        {
+            "characterName": "Player",
+            "isVelocity": false,
+            "characterPosition": {
+                "x": -6.5,
+                "y": -1.0342402458190919,
+                "z": 0.0
+            }
+        },
+        {
+            "characterName": "ChasingPolice",
+            "isVelocity": false,
+            "characterPosition": {
+                "x": -10.0,
+                "y": -1.0699646472930909,
+                "z": 0.0
+            }
+        },
+        {
+            "characterName": "Player",
+            "isVelocity": true,
+            "characterPosition": {
+                "x": 8.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    ]
+}
