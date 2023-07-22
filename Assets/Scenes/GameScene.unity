@@ -2211,6 +2211,14 @@ MonoBehaviour:
     type: Seven
     prefab: {fileID: 2643363578255182533, guid: 36d3e33599f6a47619d6fc2722824d7e, type: 3}
     size: 2
+  - tag: Platform
+    type: Eight
+    prefab: {fileID: 2643363578255182533, guid: 331b4a2c89d7b473cacf905f8fa1929c, type: 3}
+    size: 2
+  - tag: Platform
+    type: Nine
+    prefab: {fileID: 2643363578255182533, guid: baae23ce76a6e40e1b6d4f0833120b5b, type: 3}
+    size: 2
 --- !u!1 &1347912113
 GameObject:
   m_ObjectHideFlags: 0
