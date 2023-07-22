@@ -138,8 +138,9 @@ public class PlayerController : MonoBehaviour
 
             if (_backHit.collider)
             {
-                if (_backHit.collider.CompareTag("Ground"))
-                {
+                if (_backHit.collider.CompareTag("Ground")) {
+                    //Remove constraint X
+                    _rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                     StopRunning();
                 }
             }
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
     {
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
-        gameOverSound.Play();
+        // gameOverSound.Play();
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)

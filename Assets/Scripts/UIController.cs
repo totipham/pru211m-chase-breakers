@@ -23,5 +23,12 @@ public class UIController : MonoBehaviour
 
         int distance = Mathf.FloorToInt(player.distance);
         distanceScored.text = distance + " m";
+        
+        if (distance > 1000)
+        {
+            distanceScored.text = distance / 1000 + " km";
+        } 
+        
+        Time.timeScale = (float) distance/1000 + 1f;
     }
 }
