@@ -2,22 +2,9 @@
     "poolDataList": [
         {
             "objName": "Obstacle_Box",
-            "activeObjectCount": 1,
-            "objectPositions": [
-                {
-                    "x": 24.510028839111329,
-                    "y": 0.5148992538452148,
-                    "z": 0.0
-                }
-            ],
-            "objectRotations": [
-                {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.000006209754701558268,
-                    "w": 1.0
-                }
-            ]
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
         },
         {
             "objName": "Obstacle_Police",
@@ -27,16 +14,10 @@
         },
         {
             "objName": "StartPlatform_Normal",
-            "activeObjectCount": 0,
-            "objectPositions": [],
-            "objectRotations": []
-        },
-        {
-            "objName": "Platform_One",
             "activeObjectCount": 1,
             "objectPositions": [
                 {
-                    "x": 15.600028038024903,
+                    "x": -14.479991912841797,
                     "y": -4.0,
                     "z": 0.0
                 }
@@ -49,6 +30,12 @@
                     "w": 1.0
                 }
             ]
+        },
+        {
+            "objName": "Platform_One",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
         },
         {
             "objName": "Platform_Two",
@@ -58,10 +45,22 @@
         },
         {
             "objName": "Platform_Three",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_Four",
+            "activeObjectCount": 0,
+            "objectPositions": [],
+            "objectRotations": []
+        },
+        {
+            "objName": "Platform_Five",
             "activeObjectCount": 1,
             "objectPositions": [
                 {
-                    "x": -12.55997371673584,
+                    "x": 13.520007133483887,
                     "y": -4.0,
                     "z": 0.0
                 }
@@ -74,18 +73,6 @@
                     "w": 1.0
                 }
             ]
-        },
-        {
-            "objName": "Platform_Four",
-            "activeObjectCount": 0,
-            "objectPositions": [],
-            "objectRotations": []
-        },
-        {
-            "objName": "Platform_Five",
-            "activeObjectCount": 0,
-            "objectPositions": [],
-            "objectRotations": []
         },
         {
             "objName": "Platform_Six",

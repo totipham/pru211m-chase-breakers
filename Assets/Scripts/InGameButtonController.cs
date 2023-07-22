@@ -17,6 +17,7 @@ public class InGameButtonController : MonoBehaviour
 
     public void PauseGame()
     {
+        Debug.Log("Pause game");
         Time.timeScale = 0;
         _resumeButton.SetActive(true);
         _pauseButton.SetActive(false);
