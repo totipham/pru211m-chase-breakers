@@ -468,6 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceScored: {fileID: 63061686}
+  _frameRate: {fileID: 519420033}
 --- !u!1 &172850466
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb4505daa0d44f4487af599a5467065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGamePaused: 0
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,6 +1176,7 @@ MonoBehaviour:
   _pauseButton: {fileID: 0}
   _resumeButton: {fileID: 0}
   _pauseMenu: {fileID: 0}
+  _frameRate: {fileID: 0}
 --- !u!1 &689576187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,6 +3656,7 @@ MonoBehaviour:
   _pauseButton: {fileID: 1883544123}
   _resumeButton: {fileID: 1980987553}
   _pauseMenu: {fileID: 764600336}
+  _frameRate: {fileID: 519420033}
 --- !u!1 &1889090826
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,6 +3811,7 @@ MonoBehaviour:
   _pauseButton: {fileID: 1883544123}
   _resumeButton: {fileID: 1980987553}
   _pauseMenu: {fileID: 764600336}
+  _frameRate: {fileID: 519420033}
 --- !u!114 &1980987556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4119,6 +4124,7 @@ MonoBehaviour:
   _pauseButton: {fileID: 0}
   _resumeButton: {fileID: 0}
   _pauseMenu: {fileID: 0}
+  _frameRate: {fileID: 0}
 --- !u!1 &2014399587
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,6 +4503,7 @@ MonoBehaviour:
   _pauseButton: {fileID: 0}
   _resumeButton: {fileID: 0}
   _pauseMenu: {fileID: 0}
+  _frameRate: {fileID: 0}
 --- !u!1001 &4165011440374721689
 PrefabInstance:
   m_ObjectHideFlags: 0
