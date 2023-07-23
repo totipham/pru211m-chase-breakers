@@ -2379,6 +2379,18 @@ MonoBehaviour:
     type: Antena
     prefab: {fileID: 3816396421214262071, guid: 16d7edeba594744f1bbe248b4842aec5, type: 3}
     size: 2
+  - tag: Obstacle
+    type: Hanger
+    prefab: {fileID: 3816396421214262071, guid: cd949b584ea334fea87056ad3d1d0fed, type: 3}
+    size: 2
+  - tag: Obstacle
+    type: Panel
+    prefab: {fileID: 3816396421214262071, guid: d53a885cc40f648dbbb06ae3388ed365, type: 3}
+    size: 2
+  - tag: Obstacle
+    type: Heater
+    prefab: {fileID: 3816396421214262071, guid: f0eb995fe8cea44638803524566db742, type: 3}
+    size: 2
   - tag: StartPlatform
     type: Normal
     prefab: {fileID: 2643363578255182533, guid: fd2ac9ac4ed8b4d14b9a9d266878fa80, type: 3}
