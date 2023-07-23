@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour {
             var _player = GameObject.Find("Player").GetComponent<PlayerController>();
             var slowDown = _player.SlowDown(true, 0.2f, 0.1f);
             StartCoroutine(slowDown);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

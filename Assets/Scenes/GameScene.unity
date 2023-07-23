@@ -4552,6 +4552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4165011439858968306, guid: 973235a0256564301bae04634317f290, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4165011439858968308, guid: 973235a0256564301bae04634317f290, type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     public float jumpVelocity;
     public float distance = 0;
 
-    //FIXME: I am dynamic change
-    public float groundHeight = -2f;
-
     public float maxVelocity = 10f;
 
     public bool isGrounded;
@@ -153,7 +150,7 @@ public class PlayerController : MonoBehaviour
             //Player: Fall down
             if (isFall)
             {
-                _rigid.gravityScale = 30;
+                _rigid.gravityScale = 40;
             }
         }
 
@@ -177,7 +174,7 @@ public class PlayerController : MonoBehaviour
         backgroundSound.Stop();
     }
 
-    public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
+    public IEnumerator SlowDown(bool isCollide, float minusVelocity, float waitTime)
     {
         isSlowDown = true;
         if (isCollide)
