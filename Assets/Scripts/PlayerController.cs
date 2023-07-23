@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Player: Die
-        if (transform.position.y < -6)
+        if (transform.position.y < -6 || !IsVisibleFromCamera())
         {
             isDead = true;
             StopRunning();
@@ -270,6 +270,6 @@ public class PlayerController : MonoBehaviour
             _camera.WorldToViewportPoint(transform
                 .position);
         return viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 &&
-               viewportPosition.y <= 1;
+               viewportPosition.y <= 2;
     }
 }
