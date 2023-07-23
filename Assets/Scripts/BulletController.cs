@@ -27,7 +27,7 @@ public class BulletController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
             var _player = GameObject.Find("Player").GetComponent<PlayerController>();
-            var slowDown = _player.SlowDown(true, 0.2f, 0.1f);
+            var slowDown = _player.SlowDown(true, 0.002f, 1f);
             StartCoroutine(slowDown);
             gameObject.SetActive(false);
         }

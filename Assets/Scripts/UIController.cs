@@ -4,31 +4,34 @@ using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
-    PlayerController player;
+    private PlayerController _player;
     public TextMeshProUGUI distanceScored;
+    [SerializeField] private FrameRate _frameRate;
 
     private void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        _player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.isStopping)
+        if (_player.isStopping)
         {
             distanceScored.enabled = false;
             return;
         }
 
-        int distance = Mathf.FloorToInt(player.distance);
+        int distance = Mathf.FloorToInt(_player.distance);
         distanceScored.text = distance + " m";
         
         if (distance > 1000)
         {
             distanceScored.text = distance / 1000 + " km";
-        } 
-        
-        Time.timeScale = (float) distance/1000 + 1f;
+        }
+
+        if (!_frameRate.isGamePaused) {
+            Time.timeScale = (float) distance/1000 + 1f;
+        }
     }
 }

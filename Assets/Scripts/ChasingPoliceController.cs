@@ -25,7 +25,10 @@ public class ChasingPoliceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_player.isDead) return;
+        if (_player.isDead || _player.isStopping) {
+            _animator.SetTrigger("Idle");
+            return;
+        }
 
         Vector2 pos = transform.position;
         _animator.SetBool("Is Jumping", !isGrounded);
