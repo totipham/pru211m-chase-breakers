@@ -1,3 +1,6 @@
+using System.Collections;
+using UnityEngine;
+
 public class PlayerController : MonoBehaviour
 {
     // public Joystick joystick;
@@ -33,7 +36,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource gameOverSound;
     [SerializeField] private AudioSource collideSound;
-    [SerializeField] private AudioSource caughtSound;
 
     void Start()
     {
@@ -102,7 +104,6 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger("Dead");
             GameOver();
-            gameOverSound.Play();
             return;
         }
 
@@ -171,7 +172,7 @@ public class PlayerController : MonoBehaviour
     {
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
-        // gameOverSound.Play();
+        gameOverSound.Play();
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
@@ -181,9 +182,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Animation: SLOW DOWN");
             _animator.SetTrigger("Collide");
+            collideSound.Play();
         }
         maxVelocity -= minusVelocity;
-        collideSound.Play();
         yield return new WaitForSeconds(waitTime);
         isSlowDown = false;
         maxVelocity += minusVelocity;

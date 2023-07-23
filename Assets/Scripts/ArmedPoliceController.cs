@@ -9,7 +9,10 @@ public class ArmedPoliceController : MonoBehaviour
     public bool isCollideWithPolice;
     private Animator _animator;
 
+    private GameObject _armedPolice;
+
     [SerializeField] private AudioSource shootSound;
+    [SerializeField] private AudioSource caughtSound;
 
     void Start()
     {
@@ -29,7 +32,6 @@ public class ArmedPoliceController : MonoBehaviour
         {
             fireElapsedTime = 0;
             Fire();
-            shootSound.Play();
         }
     }
 
@@ -49,6 +51,7 @@ public class ArmedPoliceController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerController>().Dead();
+            caughtSound.Play();
         }
     }
 }
