@@ -68,6 +68,10 @@ public class GroundSpawner : MonoBehaviour
                 Debug.LogWarning("Platform has no area to spawn obstacle");
                 return;
             }
+            
+            if (_currentPlatform.transform.name == "Platform_Ten" && obstacleName == "Obstacle_Police") {
+                return;
+            }
 
             //Generate obstacle at random position between Start and End point
             // int randomPos = Random.Range(1, childCount);
