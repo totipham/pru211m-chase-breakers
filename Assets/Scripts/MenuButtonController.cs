@@ -1,25 +1,35 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuButtonController : MonoBehaviour {
+public class MenuButtonController : MonoBehaviour
+{
 
-    public void StartNewGame() {
+    public void Start()
+    {
+    }
+
+
+    public void StartNewGame()
+    {
         //Delete save
         PlayerPrefs.DeleteAll();
-        
+
         //Load scene
         Time.timeScale = 1;
         SceneManager.LoadScene("Scenes/GameScene");
+
+        //Stop sound
     }
 
-    public void ResumeGame() {
+    public void ResumeGame()
+    {
         Time.timeScale = 1;
         var op = SceneManager.LoadSceneAsync("Scenes/GameScene");
 
         op.completed += (AsyncOperation obj) =>
         {
-            if (obj.isDone) {
+            if (obj.isDone)
+            {
                 GameObject platformPooling = GameObject.Find("PlatformPooling");
                 GroundSpawner groundSpawner = platformPooling.GetComponent<GroundSpawner>();
                 groundSpawner.isContinueGame = true;
@@ -27,5 +37,7 @@ public class MenuButtonController : MonoBehaviour {
                 SaveSystem.Instance.LoadGameFromSave();
             }
         };
+
+        //Stop sound
     }
 }

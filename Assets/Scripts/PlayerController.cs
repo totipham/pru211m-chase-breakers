@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource gameOverSound;
     [SerializeField] private AudioSource collideSound;
+    [SerializeField] private AudioSource ingameSound;
 
     void Start()
     {
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour
         isFall = false;
         isDead = false;
         canClimb = false;
+
+        ingameSound.Play();
     }
 
     void Update()
@@ -173,6 +176,7 @@ public class PlayerController : MonoBehaviour
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
         gameOverSound.Play();
+        ingameSound.Stop();
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
