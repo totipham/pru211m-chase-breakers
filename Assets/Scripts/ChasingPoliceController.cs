@@ -26,7 +26,7 @@ public class ChasingPoliceController : MonoBehaviour
     void Update()
     {
         if (_player.isDead) {
-            _animator.SetBool("Idle", false);
+            _animator.SetTrigger("Idle");
             return;
         }
 
