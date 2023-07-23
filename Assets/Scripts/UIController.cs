@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 public class UIController : MonoBehaviour
 {
     private PlayerController _player;
-    public bool isPaused;
     public TextMeshProUGUI distanceScored;
+    [SerializeField] private FrameRate _frameRate;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
             distanceScored.text = distance / 1000 + " km";
         }
 
-        if (!isPaused) {
+        if (!_frameRate.isGamePaused) {
             Time.timeScale = (float) distance/1000 + 1f;
         }
     }
