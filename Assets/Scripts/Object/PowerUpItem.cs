@@ -14,5 +14,9 @@ namespace Object {
                 // Drop();
             }
         }
+
+        public override void Process() {
+            throw new System.NotImplementedException();
+        }
     }
 }

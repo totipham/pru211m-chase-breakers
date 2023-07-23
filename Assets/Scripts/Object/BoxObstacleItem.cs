@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace Object {
     public class BoxObstacleItem : ObstacleItem {
-        public override void Drop() {
-            throw new System.NotImplementedException();
+        public override void Process() {
+            Debug.Log("BOX: Process");
         }
     }
 }
