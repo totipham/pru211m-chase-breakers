@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-
 public class PlayerController : MonoBehaviour
 {
     // public Joystick joystick;
@@ -35,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource gameOverSound;
+    [SerializeField] private AudioSource collideSound;
     [SerializeField] private AudioSource caughtSound;
 
     void Start()
@@ -104,6 +102,7 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger("Dead");
             GameOver();
+            gameOverSound.Play();
             return;
         }
 
@@ -141,6 +140,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (_backHit.collider.CompareTag("Ground"))
                 {
+                    //Remove constraint X
+                    _rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                     StopRunning();
                 }
             }
@@ -170,11 +171,7 @@ public class PlayerController : MonoBehaviour
     {
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
-        gameOverSound.Play();
-
-        ArmedPoliceController _armedPolice = GameObject.FindGameObjectWithTag("ObstaclePolice").GetComponent<ArmedPoliceController>();
-
-
+        // gameOverSound.Play();
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
@@ -186,6 +183,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger("Collide");
         }
         maxVelocity -= minusVelocity;
+        collideSound.Play();
         yield return new WaitForSeconds(waitTime);
         isSlowDown = false;
         maxVelocity += minusVelocity;
@@ -265,7 +263,7 @@ public class PlayerController : MonoBehaviour
             // }
         }
     }
-    
+
     bool IsVisibleFromCamera()
     {
         Vector3 viewportPosition =
