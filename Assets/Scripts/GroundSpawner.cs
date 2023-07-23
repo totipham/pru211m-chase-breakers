@@ -69,7 +69,9 @@ public class GroundSpawner : MonoBehaviour
                 return;
             }
             
-            if (_currentPlatform.transform.name == "Platform_Ten" && obstacleName == "Obstacle_Police") {
+            if (_currentPlatform.transform.name == "Platform_Ten" && obstacleName == "Obstacle_Police"
+                || _currentPlatform.transform.name == "Platform_Eight" && obstacleName == "Obstacle_Police"
+                || _currentPlatform.transform.name == "Platform_Three") {
                 return;
             }
 
