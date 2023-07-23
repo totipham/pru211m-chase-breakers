@@ -9,7 +9,8 @@ public class ArmedPoliceController : MonoBehaviour
     public bool isCollideWithPolice;
     private Animator _animator;
 
-    [SerializeField] private AudioSource shootSound;
+    [SerializeField] private AudioSource fireSound;
+    [SerializeField] private AudioSource caughtSound;
 
     void Start()
     {
@@ -41,7 +42,7 @@ public class ArmedPoliceController : MonoBehaviour
         bullet.transform.parent = transform.parent;
         //Add velocity to bullet
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-2, 0);
-        shootSound.Play();
+        fireSound.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

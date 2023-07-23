@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource jumpSound;
     [SerializeField] private AudioSource gameOverSound;
+    [SerializeField] private AudioSource backgroundSound;
+    [SerializeField] private AudioSource collideSound;
 
     void Start()
     {
@@ -138,7 +140,8 @@ public class PlayerController : MonoBehaviour
 
             if (_backHit.collider)
             {
-                if (_backHit.collider.CompareTag("Ground")) {
+                if (_backHit.collider.CompareTag("Ground"))
+                {
                     //Remove constraint X
                     _rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                     StopRunning();
@@ -170,7 +173,8 @@ public class PlayerController : MonoBehaviour
     {
         gameOverScreen.Setup(Mathf.FloorToInt(distance));
         gameObject.GetComponent<PlayerController>().enabled = false;
-        // gameOverSound.Play();
+        gameOverSound.Play();
+        backgroundSound.Stop();
     }
 
     public IEnumerator SlowDown(bool isCollide = false, float minusVelocity = 5f, float waitTime = 1f)
@@ -180,6 +184,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Animation: SLOW DOWN");
             _animator.SetTrigger("Collide");
+            collideSound.Play();
         }
         maxVelocity -= minusVelocity;
         yield return new WaitForSeconds(waitTime);
@@ -261,7 +266,7 @@ public class PlayerController : MonoBehaviour
             // }
         }
     }
-    
+
     bool IsVisibleFromCamera()
     {
         Vector3 viewportPosition =
