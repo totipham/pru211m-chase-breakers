@@ -1,4 +1,4 @@
-# Unity Game Project README
+# Chases Breaker
 
 <img src="https://res.cloudinary.com/ddr0pf043/image/upload/v1690165388/chasebreaker_logo_ueo2sd.jpg" width="100" style="border-radius:10%">
 
