@@ -17,7 +17,7 @@ Chases Breaker is an infinity runner mobile game where players take on the role 
 
 ## Features
 
-List the main features and highlights of your game. This can include:
+Features and highlights in this game. Include:
 
 - Endless Gameplay: This is an endless running game genre. As a result, the game can be played continuously without a conclusion. The game only ends when the player loses due to collisions, falling, or getting caught.
 - Randomness in the Game: Platforms are generated randomly and continuously. Along with that, accompanying obstacles are also randomly generated.
@@ -25,7 +25,7 @@ List the main features and highlights of your game. This can include:
 
 ## Installation
 
-Follow this instructions to install the game
+Follow this instructions to install the game:
 
 ```bash
 1. Clone the repository: `git clone https://github.com/totipham/pru211m-chase-breakers.git`
@@ -38,7 +38,7 @@ Follow this instructions to install the game
 
 ## Controls
 
-List the controls for the game, including both keyboard and controller inputs. 
+List the controls for the game, including both keyboard and touch inputs. 
 
 ```text
 Keyboard:
