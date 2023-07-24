@@ -1,6 +1,7 @@
 # Unity Game Project README
 
-<img src="https://res.cloudinary.com/ddr0pf043/image/upload/v1690165388/chasebreaker_logo_ueo2sd.jpg" width="100">
+<img src="https://res.cloudinary.com/ddr0pf043/image/upload/v1690165388/chasebreaker_logo_ueo2sd.jpg" width="100" style="border-radius:10%">
+
 ## Table of Contents
 
 - [Game Description](#game-description)
