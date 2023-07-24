@@ -52,8 +52,6 @@ Touch Screen (for mobile):
 
 ## Gameplay
 
-Provide a brief overview of the gameplay. Explain the objective of the game and how players can progress or win.
-
 - Extend the distance from the police for as long as possible, which will contribute to achieving a high score (distance covered from the start).
 - Avoid obstacles and minimize collisions with everything to the maximum extent. Reduce the risk of unnecessary collisions.
 - Precisely jump across platforms, avoiding falling into deep holes and dangerous traps that may lead to getting stuck.
