@@ -32,7 +32,8 @@ Follow this instructions to install the game
 2. Open Unity Hub and add the project folder.
 3. Choose the appropriate Unity version of 2021.3.19f1.
 4. Wait for Unity to import all assets and build the project.
-5. Click the "Play" button to start the game in the Unity Editor.
+5. Move to Game Scene, choose Simulator Mode
+6. Click the "New Game" button to start the game in the Unity Editor.
 ```
 
 ## Controls
